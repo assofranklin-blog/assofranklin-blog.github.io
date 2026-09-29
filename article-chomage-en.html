@@ -142,6 +142,12 @@ em{font-style:italic}
 .refs{font-size:14.5px;line-height:1.5;color:#374151}
 .refs p{margin:0 0 10px;padding-left:26px;text-indent:-26px}
 .refs a{color:var(--bleu-c);word-break:break-all}
+.table-scroll{overflow-x:auto;margin:24px 0}
+table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5}
+th,td{padding:12px 14px;border:1px solid #DCE4EC;text-align:left;vertical-align:top}
+thead th{background:var(--bleu);color:#fff;font-weight:700}
+tbody th{background:var(--bleu-pale);color:var(--bleu);font-weight:700;min-width:150px}
+tbody tr:nth-child(even) td{background:#F8FAFC}
 
 footer{background:var(--bleu);color:#BBD5EC;padding:44px 24px;font-size:14.5px;line-height:1.6}
 footer .in{max-width:var(--max);margin:0 auto}
@@ -230,12 +236,19 @@ footer .q{color:#fff;font-size:19px;font-style:italic;font-weight:700;margin-bot
   <div class="rule"></div>
   <p>The operation was conducted jointly by the Directorate General of Employment and the Directorate General of Statistics, now INSTAT, with technical and financial support from the World Bank. Data collection took place in November and December 2024; results were presented on April 29, 2026.</p>
 
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Definition</div><div class="de">Strict ILO standard, with the exact reference periods stated: 7 days, 30 days, 15 days.</div></div><div class="tag">Published</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Conceptual framework</div><div class="de">19<sup>th</sup> ICLS, including all four labour-underutilization indicators, LU1 to LU4.</div></div><div class="tag">Published</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Sample design</div><div class="de">22 strata, 176 enumeration areas, two-stage sampling, 3,520 households selected, 3,408 retained, 96.8% response rate.</div></div><div class="tag">Published</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Precision</div><div class="de">Coefficients of variation calculated and published by stratum: 1.2% for participation, 1.5% for employment, 3.9% for unemployment.</div></div><div class="tag">Published</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Limitations</div><div class="de">The report itself states that provincial unemployment rates have low precision.</div></div><div class="tag">Published</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Review</div><div class="de">Review committee of five International Labour Organization officials in Geneva, Abidjan and Dakar.</div></div><div class="tag">Confirmed</div></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col">Elements</th><th scope="col">What the documentation contains</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Definition</th><td>Strict ILO standard, with the exact reference periods stated.</td></tr>
+        <tr><th scope="row">Conceptual framework</th><td>19<sup>th</sup> ICLS, including all four labour-underutilization indicators, LU1 to LU4.</td></tr>
+        <tr><th scope="row">Sample design</th><td>22 strata, 176 enumeration areas, two-stage sampling, 3,520 households selected, 3,408 retained, 96.8% response rate.</td></tr>
+        <tr><th scope="row">Precision</th><td>Coefficients of variation calculated and published by stratum, for four indicators.</td></tr>
+        <tr><th scope="row">Limitations</th><td>The report itself states that provincial unemployment rates have low precision.</td></tr>
+        <tr><th scope="row">Review</th><td>Review committee of five International Labour Organization officials in Geneva, Abidjan and Dakar.</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <p style="margin-top:22px">In plain language, a coefficient of variation of 3.9% means the true value is very likely within a range of about one and a half percentage points of the published 17.4%. That is respectable precision for a survey of 3,408 households.</p>
 

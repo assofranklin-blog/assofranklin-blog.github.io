@@ -142,6 +142,12 @@ em{font-style:italic}
 .refs{font-size:14.5px;line-height:1.5;color:#374151}
 .refs p{margin:0 0 10px;padding-left:26px;text-indent:-26px}
 .refs a{color:var(--bleu-c);word-break:break-all}
+.table-scroll{overflow-x:auto;margin:24px 0}
+table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5}
+th,td{padding:12px 14px;border:1px solid #DCE4EC;text-align:left;vertical-align:top}
+thead th{background:var(--bleu);color:#fff;font-weight:700}
+tbody th{background:var(--bleu-pale);color:var(--bleu);font-weight:700;min-width:150px}
+tbody tr:nth-child(even) td{background:#F8FAFC}
 
 footer{background:var(--bleu);color:#BBD5EC;padding:44px 24px;font-size:14.5px;line-height:1.6}
 footer .in{max-width:var(--max);margin:0 auto}
@@ -230,12 +236,19 @@ footer .q{color:#fff;font-size:19px;font-style:italic;font-weight:700;margin-bot
   <div class="rule"></div>
   <p>L'opération a été conduite conjointement par la Direction générale de l'Emploi et la Direction générale de la Statistique, devenue l'INSTAT, avec l'appui technique et financier de la Banque mondiale. La collecte s'est déroulée en novembre et décembre 2024&nbsp;; les résultats ont été présentés le 29 avril 2026.</p>
 
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Définition</div><div class="de">Norme BIT au sens strict, énoncée avec ses périodes de référence exactes&nbsp;: 7 jours, 30 jours, 15 jours.</div></div><div class="tag">Publiée</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Cadre conceptuel</div><div class="de">19<sup>e</sup> CIST, y compris les quatre indicateurs de sous-utilisation de la main-d'œuvre SU-1 à SU-4.</div></div><div class="tag">Publié</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Plan de sondage</div><div class="de">22 strates, 176 secteurs de dénombrement, tirage à deux degrés, 3&nbsp;520 ménages tirés, 3&nbsp;408 retenus, 96,8&nbsp;% de réponse.</div></div><div class="tag">Publié</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Précision</div><div class="de">Coefficients de variation calculés et publiés strate par strate&nbsp;: 1,2&nbsp;% sur la participation, 1,5&nbsp;% sur l'emploi, 3,9&nbsp;% sur le chômage.</div></div><div class="tag">Publiée</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Limites</div><div class="de">Le rapport énonce lui-même la faible précision des taux de chômage provinciaux.</div></div><div class="tag">Publiées</div></div>
-  <div class="crit ok reveal"><div class="txt"><div class="nm">Relecture</div><div class="de">Comité de lecture composé de cinq cadres du Bureau international du travail, à Genève, Abidjan et Dakar.</div></div><div class="tag">Attestée</div></div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col">Éléments</th><th scope="col">Ce que la documentation contient</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Définition</th><td>Norme BIT au sens strict, énoncée avec ses périodes de référence exactes.</td></tr>
+        <tr><th scope="row">Cadre conceptuel</th><td>19<sup>e</sup> CIST, y compris les quatre indicateurs de sous-utilisation de la main-d'œuvre SU-1 à SU-4.</td></tr>
+        <tr><th scope="row">Plan de sondage</th><td>22 strates, 176 secteurs de dénombrement, tirage à deux degrés, 3&nbsp;520 ménages tirés, 3&nbsp;408 retenus, 96,8&nbsp;% de réponse.</td></tr>
+        <tr><th scope="row">Précision</th><td>Coefficients de variation calculés et publiés strate par strate, pour quatre indicateurs.</td></tr>
+        <tr><th scope="row">Limites</th><td>Le rapport énonce lui-même la faible précision des taux de chômage provinciaux.</td></tr>
+        <tr><th scope="row">Relecture</th><td>Comité de lecture composé de cinq cadres du Bureau international du travail, à Genève, Abidjan et Dakar.</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <p style="margin-top:22px">Un coefficient de variation de 3,9&nbsp;% signifie, en langage courant, que la vraie valeur se situe très probablement dans une fourchette d'environ un point et demi autour du 17,4&nbsp;% publié. C'est une précision honorable pour une enquête de 3&nbsp;408 ménages.</p>
 
