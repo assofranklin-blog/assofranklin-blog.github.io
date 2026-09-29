@@ -1,173 +1,413 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-CA">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f7f6f2">
-    <meta name="description" content="An analysis of the reliability of Gabon's official unemployment rate, based on the 2024 national employment survey.">
-    <title>Is Gabon’s unemployment rate published by INSTAT reliable? — Assoumou-Ndong's Blog</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="contact.js" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#article-content">Skip to content</a>
-    <header class="site-header">
-      <div class="header-inner">
-        <a class="wordmark" href="index.html?lang=en" aria-label="Assoumou-Ndong's Blog home">
-          <span class="wordmark-icon" aria-hidden="true">A<span>.</span></span>
-          <span class="wordmark-name">Assoumou-Ndong's Blog</span>
-        </a>
-        <a class="language-toggle" href="article-chomage.html" lang="fr-CA" aria-label="Lire cet article en français">FR</a>
-        <nav class="primary-nav article-nav" aria-label="Main navigation">
-          <a href="index.html?lang=en#latest">Latest</a>
-          <a href="index.html?lang=en#about">About</a>
-        </nav>
-        <a class="header-cta" href="index.html?lang=en">← Back to home</a>
-      </div>
-    </header>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is Gabon's Unemployment Rate Published by INSTAT Gabon Reliable? — Assoumou-Ndong's Blog</title>
+<style>
+:root{
+  --bleu:#1F4E79; --bleu-c:#2E6DA4; --bleu-pale:#EAF1F8;
+  --teal:#2E7D6B; --ambre:#C77700; --rouge:#A63A3A;
+  --gris:#6B7280; --gris-pale:#F2F5F8; --noir:#1F2937;
+  --vert-p:#D9EAD9; --vert-t:#1E5631;
+  --ambr-p:#FBE7CE; --ambr-t:#8A5300;
+  --roug-p:#F7D8D6; --roug-t:#8B2F2C;
+  --max:860px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:#fff; color:var(--noir);
+  font-family:Calibri,Carlito,"Segoe UI",system-ui,sans-serif;
+  font-size:18px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+#progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--ambre);z-index:100;transition:width .1s linear}
 
-    <main id="article-content" class="longform">
-      <article>
-        <header class="longform-header">
-          <a class="back-link" href="index.html?lang=en#latest">← All stories</a>
-          <p class="eyebrow">Independent analysis <span aria-hidden="true">•</span> Official statistics <span aria-hidden="true">•</span> Gabon</p>
-          <h1>Is Gabon’s unemployment rate published by INSTAT reliable?</h1>
-          <p class="longform-deck">People often say that African statistics are not worth much. I read Gabon’s line by line — the publications from its 2024 national employment survey. They are far better than their reputation suggests, and the real problem lies elsewhere.</p>
-          <div class="longform-byline">
-            <span class="author-avatar">F</span>
-            <span>By <strong>Franklin Assoumou-Ndong</strong>, statistics analyst<small>Ottawa, September 12, 2026 · This analysis was produced in a personal capacity, based solely on public sources. It does not represent any employer or partner organization.</small></span>
-          </div>
-          <div class="longform-rule"></div>
-        </header>
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid #E2E8F0;z-index:90;
+  transform:translateY(-110%);transition:transform .3s ease}
+nav.on{transform:translateY(0)}
+nav .in{max-width:var(--max);margin:0 auto;padding:10px 24px;display:flex;gap:18px;
+  align-items:center;overflow-x:auto;white-space:nowrap}
+nav a{color:var(--gris);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.2px}
+nav a:hover{color:var(--bleu-c)}
+nav .brand{color:var(--bleu);font-weight:700;font-size:14px;margin-right:auto}
 
-        <div class="longform-body">
-          <aside class="verdict" aria-label="The verdict in three points">
-            <p class="eyebrow">The verdict in three points</p>
-            <p><strong>Yes</strong>, at the national level.</p>
-            <p><strong>No</strong>, at the provincial level.</p>
-            <p>And all published counts — the number of unemployed people, the labour force and the working-age population — rely on a demographic baseline that has since been superseded by the 2026 census.</p>
-          </aside>
+/* ---------- hero ---------- */
+header{background:var(--bleu);color:#fff;padding:96px 24px 64px;border-bottom:8px solid var(--ambre)}
+header .in{max-width:var(--max);margin:0 auto}
+.kicker{font-size:13px;letter-spacing:2.4px;font-weight:700;color:#9CC3E8;margin-bottom:22px}
+header h1{font-size:clamp(30px,5.2vw,48px);line-height:1.14;margin:0 0 20px;font-weight:700}
+header p.sub{font-size:19px;color:#BBD5EC;margin:0 0 30px;max-width:640px;line-height:1.55}
+header .meta{font-size:15px;color:#8FB6D8}
+header .meta a{color:#BBD5EC;text-decoration:underline;text-underline-offset:3px}
+header .meta a:hover{color:#fff}
 
-          <h2>Why the question deserves a rigorous answer</h2>
-          <p>Three or four figures are enough to sum up a country’s economic health in the eyes of the world: growth, inflation, public debt and unemployment. They circulate in International Monetary Fund reports, sovereign ratings and investment briefs. They end up having real effects, regardless of their accuracy.</p>
-          <p>Unemployment holds a particular place in that list: it is the one that speaks directly to people’s lives. When a government says unemployment is falling, it is implicitly asking its citizens to believe it.</p>
-          <p>One distinction needs to be made. Asking whether a rate is reliable is not asking whether it is “true.” No survey statistic is exact in an absolute sense: it is an estimate with uncertainty, and a statistician’s job is precisely to measure and disclose that uncertainty. Reliability is <strong>the property of a figure whose production is documented, reproducible and auditable.</strong></p>
+/* ---------- layout ---------- */
+main{max-width:var(--max);margin:0 auto;padding:0 24px 90px}
+section{padding:52px 0 8px;scroll-margin-top:64px}
+h2{font-size:27px;color:var(--bleu);margin:0 0 6px;font-weight:700;line-height:1.25}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;
+  border-radius:50%;background:var(--bleu-c);color:#fff;font-size:15px;margin-right:12px;vertical-align:3px}
+h3{font-size:20px;color:var(--bleu-c);margin:30px 0 8px;font-weight:700}
+.rule{height:2px;background:#C9D6E4;margin:14px 0 24px}
+p{margin:0 0 16px}
+.lead{font-size:19.5px}
+strong{font-weight:700}
+em{font-style:italic}
 
-          <h2>What the unemployment rate measures — and what it does not</h2>
-          <p>Under the International Labour Organization definition, a person is counted as unemployed only when <strong>all three</strong> conditions are met: they have no job, they are available to work, and they have actively looked for work recently. Gabon’s survey applies that definition and specifies its reference periods: no production activity in the past seven days, active job search during that period or the previous 30 days, and availability within 15 days at the latest.</p>
-          <p>Every working-age person is assigned to one category, and one category only.</p>
-          <p>Because all three conditions must be met, the indicator can seem counterintuitive. A university graduate in Libreville who has stopped looking because they have lost hope is <em>not</em> counted as unemployed: they are classified as inactive. A street vendor who works two hours a day is <em>not</em> unemployed either: they are employed.</p>
+/* ---------- chiffre ---------- */
+.hero-num{display:flex;flex-wrap:wrap;gap:28px;align-items:center;background:var(--gris-pale);
+  border-radius:14px;padding:30px 32px;margin:34px 0 10px}
+.hero-num .big{font-size:74px;font-weight:700;color:var(--ambre);line-height:1;letter-spacing:-1px}
+.hero-num .cap{font-size:15px;color:var(--gris);max-width:230px;line-height:1.45}
+.hero-num .verdict{flex:1;min-width:270px;border-left:2px solid #D5DDE6;padding-left:28px}
+.hero-num .verdict .lbl{font-size:13px;letter-spacing:1.6px;font-weight:700;color:var(--bleu-c);margin-bottom:10px}
+.hero-num .verdict .l1{font-size:21px;font-weight:700;margin-bottom:2px}
+.hero-num .verdict .l2{font-size:21px;font-weight:700;color:var(--rouge);margin-bottom:12px}
+.hero-num .verdict .l3{font-size:16px;color:var(--noir);line-height:1.5}
 
-          <h3>The unemployment rate must never be read on its own</h3>
-          <p>A falling rate can mean two opposite things: unemployed people found jobs, or they gave up looking and left the labour force. In the second case, conditions have worsened even as the figure improves.</p>
-          <p>Fortunately, Gabon’s survey publishes all three indicators together, and reading them jointly is reassuring. Between 2010 and 2024, unemployment fell from 20.4% to 17.4%, while labour-force participation rose from 48.7% to 49.5% and the employment rate rose from 38.8% to 40.9%. <strong>The decline in unemployment is therefore not explained by people leaving the labour force</strong>: participation and employment rose at the same time. That is the pattern of a real improvement.</p>
-          <p>Two figures deserve more public attention than 17.4%. The first is the participation rate: <strong>fewer than half of working-age people take part in the labour market</strong>. The second is the informal-employment rate, at <strong>86.5%</strong>: nearly nine in ten jobs are not covered by social security.</p>
+/* ---------- timeline ---------- */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:30px 0 10px;position:relative}
+.tl::before{content:"";position:absolute;top:38px;left:8%;right:8%;height:3px;background:#C9D6E4}
+.tl .st{text-align:center;padding:0 8px;position:relative}
+.tl .dot{width:22px;height:22px;border-radius:50%;margin:26px auto 14px;border:4px solid #fff;
+  position:relative;z-index:2;transform:scale(0);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.on .tl .dot{transform:scale(1)}
+.tl .st:nth-child(1) .dot{background:var(--bleu-c);transition-delay:.05s}
+.tl .st:nth-child(2) .dot{background:var(--teal);transition-delay:.20s}
+.tl .st:nth-child(3) .dot{background:var(--ambre);transition-delay:.35s}
+.tl .st:nth-child(4) .dot{background:var(--rouge);transition-delay:.50s}
+.tl .d{font-size:14px;font-weight:700;margin-bottom:0}
+.tl .st:nth-child(1) .d{color:var(--bleu-c)} .tl .st:nth-child(2) .d{color:var(--teal)}
+.tl .st:nth-child(3) .d{color:var(--ambre)} .tl .st:nth-child(4) .d{color:var(--rouge)}
+.tl .t{font-size:14px;color:var(--noir);line-height:1.42}
 
-          <h2>What the survey actually publishes</h2>
-          <p>The operation was conducted jointly by the Directorate General of Employment and the Directorate General of Statistics, now INSTAT, with technical and financial support from the World Bank. Data collection took place in November and December 2024; the results were presented on April 29, 2026.</p>
-          <div class="table-scroll">
-            <table>
-              <thead><tr><th>Element</th><th>What the document contains</th></tr></thead>
-              <tbody>
-                <tr><th>Definition</th><td>Strict ILO standard, with the precise reference periods stated</td></tr>
-                <tr><th>Conceptual framework</th><td>19th ICLS, including all four labour-underutilization indicators, LU1 to LU4</td></tr>
-                <tr><th>Sample design</th><td>22 strata, 176 enumeration areas, two-stage sampling, 3,520 households selected, 3,408 retained, 96.8% response rate</td></tr>
-                <tr><th>Precision</th><td>Coefficients of variation calculated and published by stratum for four indicators</td></tr>
-                <tr><th>Limitations</th><td>The report itself states that provincial unemployment rates have low precision</td></tr>
-                <tr><th>Review</th><td>Review committee of five International Labour Organization officials in Geneva, Abidjan and Dakar</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p>This last point deserves emphasis. At the national level, the coefficients of variation are 1.2% for participation, 1.5% for employment and 3.9% for unemployment. In plain language, a 3.9% coefficient means the true value is very likely within about one and a half percentage points of the published 17.4%. That is respectable precision for a survey of 3,408 households.</p>
+/* ---------- grille verdicts ---------- */
+.crit{border-radius:9px;padding:14px 18px;margin-bottom:9px;display:flex;gap:16px;
+  align-items:center;opacity:0;transform:translateY(10px);transition:all .4s ease}
+.on .crit{opacity:1;transform:none}
+.crit .txt{flex:1;min-width:0}
+.crit .nm{font-weight:700;font-size:17px;margin-bottom:1px}
+.crit .de{font-size:15px;line-height:1.42}
+.crit .tag{font-size:13px;font-weight:700;color:#fff;border-radius:16px;padding:5px 14px;white-space:nowrap}
+.ok{background:var(--vert-p)} .ok .nm{color:var(--vert-t)} .ok .tag{background:var(--vert-t)}
+.pa{background:var(--ambr-p)} .pa .nm{color:var(--ambr-t)} .pa .tag{background:var(--ambr-t)}
+.no{background:var(--roug-p)} .no .nm{color:var(--roug-t)} .no .tag{background:var(--roug-t)}
 
-          <h2>First caveat: the figure is reliable only nationally</h2>
-          <p>The survey does more than publish its precision: it draws conclusions from it and says so. Outside Libreville and Port-Gentil, coefficients of variation for unemployment exceed 10%, and in seven of the 14 strata they exceed 16%. In the report’s own words, this indicates low statistical precision for the corresponding provincial rates. Few statistical agencies say this about their own work.</p>
-          <p>Above 16%, the report itself considers precision low.</p>
-          <p>Yet the practical consequence is not flagged in the tables. The presentation does not distinguish the national rate of 17.4% from the Nyanga rate, whose estimate has a 33.3% coefficient of variation. <strong>A provincial rate this imprecise cannot be used to rank provinces, track change or target an employment program.</strong> The warning exists, but it is buried in a methodological subsection few readers will reach.</p>
+/* ---------- barres ---------- */
+.chart{background:var(--bleu-pale);border-radius:12px;padding:26px 28px;margin:26px 0}
+.chart .row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.chart .lab{width:150px;font-size:15px;font-weight:700;text-align:right;flex-shrink:0}
+.chart .track{flex:1;background:#fff;border-radius:5px;height:34px;overflow:hidden}
+.chart .fill{height:100%;width:0;border-radius:5px;transition:width 1.1s cubic-bezier(.22,.9,.3,1)}
+.chart .val{width:92px;font-size:16px;font-weight:700;flex-shrink:0}
+.chart .note{font-size:14.5px;color:var(--gris);margin-top:12px;line-height:1.5}
+.badge94{display:inline-block;background:var(--ambre);color:#fff;font-weight:700;
+  border-radius:6px;padding:3px 10px;font-size:15px}
 
-          <h2>Second caveat: two official population figures</h2>
-          <p>This is the most serious difficulty. The survey’s summary table begins with a decisive figure: its estimated population is <strong>2,031,882</strong>, of whom 62.1% are aged 15 and over, with an urbanization rate of 87.8%. That age structure is entirely plausible.</p>
-          <p>On August 27, 2026, following field checks, the Constitutional Court certified the general census results, putting the resident population at <strong>3,518,621</strong>. The census was conducted entirely digitally, with geolocation, and a national coverage rate of 97% was reported.</p>
-          <p>The survey weights its results to a population of 2.03 million; the census certified in August counts 3.52 million.</p>
-          <p>The gap is nearly 1.49 million people. A formal reconciliation is not yet possible: the census age structure has not been released, nor have the departmental breakdown or methodology needed to reconstruct how collected data became the certified total.</p>
-          <p>An informed reader may object that unemployment is a ratio and a change in population scale does not mechanically affect it. That is true of the rate. It is not true of the counts: if the actual population is close to 3.5 million, <strong>the number of unemployed people is not 108,733 but substantially higher, and every numerical target in public policy built on those counts needs to be revisited.</strong></p>
+/* ---------- comparaison ---------- */
+.pair{border-radius:9px;padding:14px 18px;margin-bottom:10px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.pair .p1{flex:1;min-width:240px}
+.pair .pn{font-weight:700;font-size:18px;margin-bottom:2px}
+.pair .pd{font-size:15px;line-height:1.42}
+.pair .pv{font-weight:700;font-size:15px}
 
-          <h2>Third caveat: where are the discouraged workers?</h2>
-          <p>The survey classifies 636,491 people as outside the labour force and counts just <strong>3,341</strong> as potential labour force — people without work who do not meet every unemployment criterion but would nevertheless like to work.</p>
-          <p>This result deserves scrutiny. It implies a broad unemployment rate of 17.8%, compared with 17.4% under the strict definition, a gap of just 0.4 percentage points. Senegal, with an economy also marked by informality, records a gap of nearly 18 points between its two definitions: 5.1% under the strict definition versus 22.9% under the broad one. Gabon’s labour market may genuinely be different; it is also possible that the questions on availability and desire for work were applied narrowly. <strong>In a country where labour-force participation is 49.5%, the claim that fewer than one in 190 inactive people wants to work calls for supporting evidence.</strong></p>
+/* ---------- encadrés ---------- */
+.note{border-left:5px solid var(--bleu-c);background:var(--gris-pale);border-radius:0 9px 9px 0;
+  padding:16px 20px;margin:24px 0;font-size:16.5px;line-height:1.55}
+.good{border-left-color:var(--vert-t);background:var(--vert-p)}
+.good b{color:var(--vert-t)}
 
-          <h2>Why 17.4% when Senegal reports 5.1%?</h2>
-          <p>The question comes up often, and the answer is structural. Under the strict ILO definition, Senegal reports 5.1% and Côte d’Ivoire 2.3%. These very low rates do not mean full employment: in largely informal, rural economies, almost everyone does some work, and very few people meet all three unemployment criteria at once.</p>
-          <p>The definition used, as much as the structure of the labour market, explains the difference between the figures.</p>
-          <p>Gabon is different. With an urbanization rate of 87.8%, measured by the survey itself, and little subsistence agriculture to absorb labour, the country lacks the cushion of rural informal activity that mechanically pushes down strict unemployment elsewhere. Gabon’s figure is therefore economically coherent — and is supported by a rural unemployment rate of 5.8%, close to West African levels.</p>
+/* ---------- recommandations ---------- */
+.rec{background:var(--gris-pale);border-left:6px solid var(--bleu-c);border-radius:0 9px 9px 0;
+  padding:14px 18px;margin-bottom:10px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.rec .r1{flex:1;min-width:260px}
+.rec .rt{font-weight:700;color:var(--bleu);font-size:17px;margin-bottom:2px}
+.rec .rd{font-size:15px;line-height:1.42}
+.rec .rh{background:var(--bleu-c);color:#fff;border-radius:16px;padding:5px 14px;font-size:13px;font-weight:700;white-space:nowrap}
 
-          <h2>Gabon compared with its CEMAC peers</h2>
-          <p>A comparison is only useful when the reference group makes sense. The first circle is CEMAC: shared regional institutions, similar technical support and comparable constraints.</p>
-          <div class="table-scroll">
-            <table>
-              <thead><tr><th>Country</th><th>Latest operation covering employment</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr><th>Gabon</th><td>ENEC 2024 — dedicated survey, precision published by stratum</td><td>Best documented</td></tr>
-                <tr><th>Cameroon</th><td>EESI 3, 2021 collection — methodological reports online</td><td>Solid documentation</td></tr>
-                <tr><th>Congo</th><td>Last survey in 2012; quarterly system announced for January 2027</td><td>To be rebuilt</td></tr>
-                <tr><th>Chad</th><td>ECOSIT 4, 2018–2019 — employment module in a general survey</td><td>Indirect source</td></tr>
-                <tr><th>Equatorial Guinea, Central African Republic</th><td>No recent dedicated survey identified in public sources</td><td>Not documented</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p>The finding favours Gabon: <strong>within CEMAC, its 2024 survey is currently the most recent, comprehensive and well-documented operation</strong>, and Gabon is the only country in the region to have published coefficients of variation by stratum in 2026.</p>
-          <p>Two caveats qualify this leading position. The regional bar is low: no CEMAC country currently produces a quarterly labour-market indicator. And Gabon’s lead rests on a one-off survey; it will disappear if the next edition takes as long to arrive as this one did.</p>
-          <p>Outside CEMAC, the comparison changes. The World Bank classifies Gabon as an upper-middle-income country. Senegal, whose per-capita income is several times lower, publishes a full employment bulletin every quarter. <strong>The argument is therefore not regional but fiscal</strong>: the constraint preventing Gabon from doing the same is one of organization and prioritization, not funding.</p>
+/* ---------- toggle définitions ---------- */
+.tog{border:1px solid #DCE4EC;border-radius:10px;margin:20px 0;overflow:hidden}
+.tog button{width:100%;text-align:left;background:#fff;border:0;padding:14px 18px;
+  font-family:inherit;font-size:16.5px;font-weight:700;color:var(--bleu);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:12px}
+.tog button:hover{background:var(--gris-pale)}
+.tog .sign{color:var(--ambre);font-size:22px;line-height:1}
+.tog .body{display:none;padding:0 18px 16px;font-size:16px;line-height:1.55;color:var(--noir)}
+.tog.open .body{display:block}
 
-          <h2>Six measures that cost almost nothing</h2>
-          <ol>
-            <li><strong>Publish both questionnaires.</strong> This is the most useful missing piece: it would let readers verify how the line between unemployment, inactivity and potential labour force was drawn.</li>
-            <li><strong>Flag precision in the tables.</strong> Add a coefficient-of-variation column or a quality symbol, and an explicit warning beside fragile estimates.</li>
-            <li><strong>Reconcile the two population figures.</strong> Publish a note explaining the change from 2,031,882 to 3,518,621 people and the resulting revision to counts.</li>
-            <li><strong>Publish standardized metadata</strong> describing the operation, its definitions and its limitations.</li>
-            <li><strong>Bridge 2010 and 2024.</strong> International standards changed in 2013 between the two surveys; a methodological note would make the comparison more robust.</li>
-            <li><strong>Submit the results to ILOSTAT.</strong> Until they are, international comparisons for Gabon will continue to rely on a modelled estimate rather than a national measurement.</li>
-          </ol>
-          <p>Two initiatives are already underway, and it would be unfair not to acknowledge them: in August 2026, INSTAT received a support mission to prepare the Harmonized Survey on Household Living Conditions and technical assistance to establish the governing bodies of the national statistical system. <strong>Updating the sampling frame and clarifying statistical governance are not starting from zero.</strong></p>
+/* ---------- refs ---------- */
+.refs{font-size:14.5px;line-height:1.5;color:#374151}
+.refs p{margin:0 0 10px;padding-left:26px;text-indent:-26px}
+.refs a{color:var(--bleu-c);word-break:break-all}
 
-          <h2>Conclusion</h2>
-          <p>An official figure is a promise to citizens: that if they wish, they can verify how it was produced. The 2024 survey keeps that promise in substance. It explains its sample design, publishes coefficients of variation by stratum, states its own limitations, uses the current international conceptual framework and submitted its report for review by the International Labour Organization. This is serious work, and it deserves recognition.</p>
-          <p>Three tasks remain. The simplest is the audit trail: publish the questionnaires, metadata and an anonymized microdata file so Gabonese universities can work with the data instead of its summary. The most urgent is the demographic baseline. The most demanding is regularity: a country that can produce a survey of this quality once every 14 years can learn to produce one every quarter.</p>
-          <blockquote>“A statistic earns authority only when it is willing to be challenged. This one has made that possible, and that is already a great deal.”</blockquote>
+footer{background:var(--bleu);color:#BBD5EC;padding:44px 24px;font-size:14.5px;line-height:1.6}
+footer .in{max-width:var(--max);margin:0 auto}
+footer .q{color:#fff;font-size:19px;font-style:italic;font-weight:700;margin-bottom:22px;line-height:1.45}
+@media(max-width:640px){
+  .tl{grid-template-columns:1fr 1fr;row-gap:22px}
+  .tl::before{display:none}
+  .chart .lab{width:100%;text-align:left}
+  .chart .row{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
 
-          <section class="article-sources" aria-labelledby="sources-title">
-            <h2 id="sources-title">Download the full report</h2>
-            <p>Nineteen pages, five figures, seven tables and 29 references with access dates: <a href="https://drive.google.com/file/d/1PQE8QEuQMrNuRwGH_sDGL1WvGpYY3PRj/view?usp=sharing" target="_blank" rel="noopener noreferrer">download the report</a>.</p>
-            <h2>Key sources</h2>
-            <p>All web pages were accessed on September 12, 2026. The complete list appears in the report.</p>
-            <ul>
-              <li>Directorate General of Employment and Directorate General of Statistics (2026). <em>Employment, unemployment and working conditions in Gabon in 2024 — summary report, tables and charts, thematic notes.</em> Libreville, April 29, 2026. <a href="https://new.instatgabon.org/enec" target="_blank" rel="noopener noreferrer">new.instatgabon.org/enec</a>.</li>
-              <li>National Agency for Statistics and Demography (2026). <em>National Employment Survey in Senegal, first quarter 2026.</em> <a href="https://www.ansd.sn/Indicateur/enquete-emploi" target="_blank" rel="noopener noreferrer">ansd.sn</a>.</li>
-              <li>International Labour Organization (2013). <em>Resolution concerning statistics of work, employment and labour underutilization, 19th ICLS.</em> <a href="https://www.ilo.org/fr/media/209356/download" target="_blank" rel="noopener noreferrer">ilo.org</a>.</li>
-              <li>Gabonactu (2026). <em>RGPL: Gabon now officially has 3,518,621 inhabitants.</em> <a href="https://gabonactu.com/blog/2026/08/27/rgpl-le-gabon-compte-desormais-officiellement-3-518-621-habitants/" target="_blank" rel="noopener noreferrer">gabonactu.com</a>.</li>
-              <li>Gabonreview (2026). <em>RGPL 2026: 3.5 million inhabitants, the demographic leap that calls for explanation.</em> <a href="https://www.gabonreview.com/rgpl-2026-35-millions-dhabitants-le-grand-bond-demographique-qui-demande-des-explications/" target="_blank" rel="noopener noreferrer">gabonreview.com</a>.</li>
-              <li>National Institute of Statistics of Cameroon (2023). <em>EESI 3 — Phase 1: Employment Survey, main report.</em> <a href="https://ins-cameroun.cm/statistique/eesi3-phase-1-enquete-sur-lemploi-rapport-principal/" target="_blank" rel="noopener noreferrer">ins-cameroun.cm</a>.</li>
-              <li>INSEE (2024). <em>The essentials on… unemployment.</em> <a href="https://www.insee.fr/fr/statistiques/4805248" target="_blank" rel="noopener noreferrer">insee.fr</a>.</li>
-              <li>Statistics Canada (2024). <em>Labour Force Survey — definitions, data sources and methods.</em> <a href="https://www23.statcan.gc.ca/imdb/p2SV_f.pl?Function=getSurvey&amp;SDDS=3701" target="_blank" rel="noopener noreferrer">statcan.gc.ca</a>.</li>
-            </ul>
-          </section>
+<nav id="nav"><div class="in">
+  <a class="brand" href="index.html?lang=en">Assoumou-Ndong's Blog</a>
+  <a href="article-chomage.html" lang="fr-CA">Français</a>
+  <a href="#definition">Definition</a>
+  <a href="#fiabilite">Reliability</a>
+  <a href="#agences">Agencies</a>
+  <a href="#enec">ENEC 2024</a>
+  <a href="#reserves">Caveats</a>
+  <a href="#cemac">CEMAC</a>
+  <a href="#verdict">Assessment</a>
+  <a href="#reco">Recommendations</a>
+</div></nav>
 
-          <p class="article-disclaimer">Franklin Assoumou-Ndong is a statistics analyst. This analysis was produced in a personal capacity and is based solely on public sources. It does not represent any employer, government department or partner organization. It questions neither the competence nor the good faith of the officials who produced ENEC 2024: it concerns an indicator and its documentation, not the people behind it.</p>
-          <p class="original-link"><a href="https://franklinstuff.blogspot.com/2026/09/taux-de-chomage-instat-gabon-fiable.html" target="_blank" rel="noopener noreferrer">Read the original French publication on Franklin’s Stuff ↗</a></p>
-        </div>
-      </article>
-    </main>
+<header><div class="in">
+  <div class="kicker">INDEPENDENT ANALYSIS • OFFICIAL STATISTICS • GABON</div>
+  <h1>Can the unemployment rate published by INSTAT Gabon be considered reliable?</h1>
+  <p class="sub">An assessment of ENEC 2024's 17.4% in light of International Labour Organization standards and the practices of leading statistical agencies, based on documents published by INSTAT Gabon.</p>
+  <div class="meta">Franklin Assoumou-Ndong &nbsp;•&nbsp; Statistics analyst &nbsp;•&nbsp; Ottawa, September 12, 2026<br><a href="index.html?lang=en#latest">← Back to the blog</a> &nbsp;•&nbsp; <a href="article-chomage.html" lang="fr-CA">Read this article in French</a></div>
+</div></header>
 
-    <footer class="site-footer">
-      <div class="footer-inner section-wrap">
-        <a class="wordmark footer-wordmark" href="index.html?lang=en" aria-label="Assoumou-Ndong's Blog home"><span class="wordmark-icon">A<span>.</span></span><span class="wordmark-name">Assoumou-Ndong's Blog</span></a>
-        <span class="footer-note">Independent ideas, clearly considered.</span>
-        <div class="footer-links"><a href="index.html?lang=en#about">About</a><a href="#contact" data-contact-link>Contact</a><a href="index.html?lang=en#newsletter">Newsletter</a></div>
-        <span class="copyright">© 2026 Assoumou-Ndong's Blog</span>
-      </div>
-    </footer>
-  </body>
+<main>
+
+<section id="chiffre">
+  <div class="hero-num reveal">
+    <div>
+      <div class="big" data-count="17,4 %">0</div>
+      <div class="cap">National unemployment rate, ENEC 2024.<br>Published precision: coefficient of variation of 3.9%.</div>
+    </div>
+    <div class="verdict">
+      <div class="lbl">THE VERDICT IN THREE POINTS</div>
+      <div class="l1" style="color:var(--vert-t)">Yes, at the national level.</div>
+      <div class="l2">No, at the provincial level.</div>
+      <div class="l3">And all published counts rely on a demographic baseline that has since been superseded by the 2026 census.</div>
+    </div>
+  </div>
+  <p class="lead" style="margin-top:26px">People often say that African statistics are not worth much. The publications from the 2024 national employment survey are far better than that reputation suggests. They explain the sample design, publish margins of error by stratum, acknowledge their own limitations, and the summary report was reviewed by five International Labour Organization officials. The problem lies elsewhere — and it is serious.</p>
+  <div class="note">Asking whether a rate is reliable is not asking whether it is “true.” No survey statistic is exact in an absolute sense. Reliability is <b>the property of a figure whose production is documented, reproducible and auditable</b>.</div>
+</section>
+
+<section id="definition">
+  <h2><span class="n">1</span>What the rate measures — and what it does not</h2>
+  <div class="rule"></div>
+  <p>Under the International Labour Organization definition, a person is counted as unemployed only when <strong>all three</strong> conditions are met: they have no job, they are available to work, and they have actively looked for work recently. ENEC applies this definition and specifies the reference periods: no production activity in the past seven days, active job search during that period or the previous 30 days, and availability within 15 days at the latest.</p>
+
+  <div class="tog"><button>Why this definition can seem counterintuitive <span class="sign">+</span></button>
+    <div class="body">A university graduate in Libreville who has stopped looking because they have lost hope is <em>not</em> counted as unemployed: they are classified as inactive. A street vendor who works two hours a day is <em>not</em> unemployed either: they are employed. The lived reality of underemployment is therefore largely missed by this indicator. That is not a measurement flaw; it is a limitation of the definition.</div></div>
+
+  <h3>The unemployment rate must never be read on its own</h3>
+  <p>A falling rate can mean two opposite things: unemployed people found jobs, or they gave up looking and left the labour force. Fortunately, ENEC publishes all three indicators together. Between 2010 and 2024, unemployment fell from 20.4% to 17.4%, while participation rose from 48.7% to 49.5% and the employment rate rose from 38.8% to 40.9%. <strong>The decline is therefore not explained by people leaving the labour force</strong>: it is the pattern of a real improvement.</p>
+  <div class="note">Two figures deserve more public attention than 17.4%. The participation rate: <b>fewer than half of working-age people</b> take part in the labour market. And the informal-employment rate: <b>86.5%</b>, meaning nearly nine in ten jobs are outside social security coverage.</div>
+</section>
+
+<section id="fiabilite">
+  <h2><span class="n">2</span>Eight conditions for reliability</h2>
+  <div class="rule"></div>
+  <p>Reliability is not declared; it is demonstrated. Eight conditions, drawn from ILO standards, the Fundamental Principles of Official Statistics and the practices of leading agencies, make it possible to assess it.</p>
+  <div class="note"><b>Standard</b> — what definition? &nbsp;·&nbsp; <b>Source</b> — where does the data come from? &nbsp;·&nbsp; <b>Sampling frame</b> — which census? &nbsp;·&nbsp; <b>Precision</b> — within how many points? &nbsp;·&nbsp; <b>Timeliness</b> — how often, and with what delay? &nbsp;·&nbsp; <b>Transparency</b> — can I reproduce the calculation? &nbsp;·&nbsp; <b>Accessibility</b> — can the public find it? &nbsp;·&nbsp; <b>Independence</b> — who decides when to publish?</div>
+  <p>Precision deserves particular attention: it determines not only what conclusions can be drawn, but <strong>the geographic level at which a figure can be published</strong>. It will play a decisive role in the assessment that follows.</p>
+</section>
+
+<section id="agences">
+  <h2><span class="n">3</span>What leading agencies do</h2>
+  <div class="rule"></div>
+  <p>Canada measures unemployment through the Labour Force Survey, launched in November 1945 and conducted <strong>monthly since 1952</strong> among about 65,000 households. Statistics Canada sets an explicit target: a coefficient of variation no higher than 2% nationally and 4% to 7% provincially. Results are released about ten days after data collection ends.</p>
+  <p>France conducts its survey quarterly, covering about 90,000 people aged 15 and over each quarter. With every release, it publishes the unemployment, activity and employment rates, the share of people in the unemployment halo, and the associated confidence interval — plus or minus 0.3 percentage points.</p>
+  <div class="note">What these two systems have in common is not national wealth or sample size. It is <b>the documentation surrounding the figure</b>. Neither Statistics Canada nor INSEE asks the public to take its word for it: both provide the means to challenge their results. In this respect, ENEC 2024 belongs to the same tradition.</div>
+</section>
+
+<section id="enec">
+  <h2><span class="n">4</span>What ENEC 2024 actually publishes</h2>
+  <div class="rule"></div>
+  <p>The operation was conducted jointly by the Directorate General of Employment and the Directorate General of Statistics, now INSTAT, with technical and financial support from the World Bank. Data collection took place in November and December 2024; results were presented on April 29, 2026.</p>
+
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Definition</div><div class="de">Strict ILO standard, with the exact reference periods stated: 7 days, 30 days, 15 days.</div></div><div class="tag">Published</div></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Conceptual framework</div><div class="de">19<sup>th</sup> ICLS, including all four labour-underutilization indicators, LU1 to LU4.</div></div><div class="tag">Published</div></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Sample design</div><div class="de">22 strata, 176 enumeration areas, two-stage sampling, 3,520 households selected, 3,408 retained, 96.8% response rate.</div></div><div class="tag">Published</div></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Precision</div><div class="de">Coefficients of variation calculated and published by stratum: 1.2% for participation, 1.5% for employment, 3.9% for unemployment.</div></div><div class="tag">Published</div></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Limitations</div><div class="de">The report itself states that provincial unemployment rates have low precision.</div></div><div class="tag">Published</div></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Review</div><div class="de">Review committee of five International Labour Organization officials in Geneva, Abidjan and Dakar.</div></div><div class="tag">Confirmed</div></div>
+
+  <p style="margin-top:22px">In plain language, a coefficient of variation of 3.9% means the true value is very likely within a range of about one and a half percentage points of the published 17.4%. That is respectable precision for a survey of 3,408 households.</p>
+
+  <div class="tog"><button>What is still missing from the audit trail <span class="sign">+</span></button>
+    <div class="body">Four items are missing. None prevents readers from using the results, but all limit a third party's ability to audit them in depth. Neither questionnaire has been published — yet the precise wording of questions about job search and availability determines how people are classified as unemployed, inactive or part of the potential labour force. There is no anonymized microdata file or standardized metadata sheet, and the results do not yet appear to have been added to ILOSTAT.</div></div>
+</section>
+
+<section id="reserves">
+  <h2><span class="n">5</span>Three serious caveats</h2>
+  <div class="rule"></div>
+
+  <h3>The figure is reliable only at the national level</h3>
+  <p>Outside Libreville and Port-Gentil, the coefficients of variation for unemployment exceed 10%, and in seven of the 14 strata they exceed 16%. In the report's own words, this reflects low statistical precision in the corresponding provinces.</p>
+  <div class="chart reveal">
+    <div class="row"><div class="lab">National</div><div class="track"><div class="fill" style="background:var(--bleu)" data-w="11"></div></div><div class="val">3.9%</div></div>
+    <div class="row"><div class="lab">Libreville</div><div class="track"><div class="fill" style="background:var(--vert-t)" data-w="17"></div></div><div class="val">5.9%</div></div>
+    <div class="row"><div class="lab">Port-Gentil</div><div class="track"><div class="fill" style="background:var(--vert-t)" data-w="26"></div></div><div class="val">9.0%</div></div>
+    <div class="row"><div class="lab">Haut-Ogooué</div><div class="track"><div class="fill" style="background:var(--ambre)" data-w="33"></div></div><div class="val">11.6%</div></div>
+    <div class="row"><div class="lab">Woleu-Ntem</div><div class="track"><div class="fill" style="background:var(--rouge)" data-w="57"></div></div><div class="val">20.0%</div></div>
+    <div class="row"><div class="lab">Ngounié</div><div class="track"><div class="fill" style="background:var(--rouge)" data-w="74"></div></div><div class="val">25.9%</div></div>
+    <div class="row"><div class="lab">Nyanga</div><div class="track"><div class="fill" style="background:var(--rouge)" data-w="95"></div></div><div class="val">33.3%</div></div>
+    <div class="note" style="border:0;background:none;padding:0;margin-top:14px">Coefficient of variation for the unemployment rate. Above 16%, the report itself considers precision low. Yet the tables do not distinguish the national rate from the rate for Nyanga.</div>
+  </div>
+
+  <h3>Two official population figures</h3>
+  <p>This is the most serious difficulty. The survey weights its results to a population of <strong>2,031,882 people</strong>, 62.1% of whom are aged 15 or older. On August 27, 2026, the Constitutional Court certified the results of the general census, which put the resident population at <strong>3,518,621 people</strong>, with a reported coverage rate of 97%.</p>
+  <div class="chart reveal">
+    <div class="row"><div class="lab">2013 sampling frame</div><div class="track"><div class="fill" style="background:#8A94A3" data-w="51"></div></div><div class="val">1.811 M</div></div>
+    <div class="row"><div class="lab">ENEC 2024 population</div><div class="track"><div class="fill" style="background:var(--teal)" data-w="58"></div></div><div class="val">2.032 M</div></div>
+    <div class="row"><div class="lab">2026 census</div><div class="track"><div class="fill" style="background:var(--bleu)" data-w="100"></div></div><div class="val">3.519 M</div></div>
+    <div class="note" style="border:0;background:none;padding:0;margin-top:14px"><span class="badge94">+73%</span> between the population used in the survey and the certified census count. Since the census age structure has not yet been released, the figures cannot currently be reconciled.</div>
+  </div>
+  <div class="tog"><button>“But the rate is a ratio”: why that objection is not enough <span class="sign">+</span></button>
+    <div class="body">The objection is valid for the rate. It is not valid for the counts: if the actual population is close to 3.5 million, the number of unemployed people is not 108,733 but substantially higher, and all numerical targets in public policies built on those counts need to be revisited. Nor does it resolve the coverage issue: a 2013 sampling frame does not include residential areas created since then, and poorly represents a population that is now one-third foreign-born — precisely the group the survey shows behaves differently, with an unemployment rate of 5.2% compared with 22.1% for non-migrants.</div></div>
+
+  <h3>Where are the discouraged workers?</h3>
+  <p>The survey classifies 636,491 people as outside the labour force and identifies only <strong>3,341</strong> as potential labour force. The resulting expanded unemployment rate is 17.8%, compared with 17.4% under the strict definition — a difference of 0.4 percentage points. Senegal, with an equally informal economy, measures a gap nearly eighteen times larger: 5.1% under the strict definition versus 22.9% under the expanded one. <strong>In a country where labour-force participation is 49.5%, the claim that fewer than one in 190 people outside the labour force wants to work needs supporting evidence.</strong></p>
+
+  <h3>Why is the rate 17.4% when Senegal reports 5.1%?</h3>
+  <p>The answer is structural. In a largely informal and rural economy, almost everyone does some work, and very few people meet all three unemployment criteria at once. Gabon is different: with an urbanization rate of 87.8%, measured by the survey itself, and subsistence agriculture that absorbs little labour, it does not have the same cushion of rural informal activity. Gabon's figure is therefore economically plausible, and is supported by a rural unemployment rate of 5.8%, close to levels seen in West Africa.</p>
+</section>
+
+<section id="cemac">
+  <h2><span class="n">6</span>Gabon compared with its peers</h2>
+  <div class="rule"></div>
+  <p>A comparison is useful only when the reference group is relevant. The first circle is CEMAC: the same regional institutions, similar technical support and comparable constraints.</p>
+  <div class="pair ok reveal"><div class="p1"><div class="pn" style="color:var(--vert-t)">Gabon</div><div class="pd">ENEC 2024 — dedicated survey, precision published by stratum.</div></div><div class="pv" style="color:var(--vert-t)">Best documented</div></div>
+  <div class="pair pa reveal"><div class="p1"><div class="pn" style="color:var(--ambr-t)">Cameroon</div><div class="pd">EESI 3, 2021 data collection; methodological reports available online.</div></div><div class="pv" style="color:var(--ambr-t)">Strong documentation</div></div>
+  <div class="pair no reveal"><div class="p1"><div class="pn" style="color:var(--roug-t)">Congo</div><div class="pd">Last survey in 2012; quarterly system announced for January 2027.</div></div><div class="pv" style="color:var(--roug-t)">To be rebuilt</div></div>
+  <div class="pair no reveal"><div class="p1"><div class="pn" style="color:var(--roug-t)">Chad</div><div class="pd">ECOSIT 4, 2018–2019 — employment module in a general survey.</div></div><div class="pv" style="color:var(--roug-t)">Indirect source</div></div>
+  <div class="pair no reveal"><div class="p1"><div class="pn" style="color:var(--roug-t)">Equatorial Guinea, CAR</div><div class="pd">No recent dedicated survey identified in public sources.</div></div><div class="pv" style="color:var(--roug-t)">Not documented</div></div>
+
+  <p style="margin-top:22px"><strong>Within CEMAC, ENEC 2024 is currently the most recent, comprehensive and best-documented operation.</strong> Two caveats qualify this leading position: the regional bar is low, as no country in the area produces a quarterly indicator; and Gabon's lead rests on a one-off survey that will fade if the next edition takes just as long to arrive.</p>
+  <div class="note">Outside CEMAC, the comparison changes. The World Bank classifies Gabon as an upper-middle-income country. Senegal, whose per-capita income is several times lower, publishes a full employment bulletin every quarter. <b>The argument is therefore not regional but fiscal.</b></div>
+</section>
+
+<section id="verdict">
+  <h2><span class="n">7</span>Overall assessment</h2>
+  <div class="rule"></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Standard</div><div class="de">Strict ILO definition stated with its reference periods. 19<sup>th</sup> ICLS framework used. Report reviewed by five ILO officials.</div></div><div class="tag">Met</div></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Source</div><div class="de">Household survey covering the entire country, computer-assisted data collection and documented classifications.</div></div><div class="tag">Met</div></div>
+  <div class="crit no reveal"><div class="txt"><div class="nm">Sampling frame</div><div class="de">Frame based on the 2013 census. The weighted population of 2,031,882 is contradicted by the 3,518,621 count from the 2026 census.</div></div><div class="tag">Not met</div></div>
+  <div class="crit pa reveal"><div class="txt"><div class="nm">Precision</div><div class="de">Coefficients of variation calculated and published. Good national precision; low in seven of 14 strata, with no warning attached to the figures.</div></div><div class="tag">Partial</div></div>
+  <div class="crit no reveal"><div class="txt"><div class="nm">Timeliness and frequency</div><div class="de">Two measurements in 14 years. Seventeen months between the end of data collection and the public release.</div></div><div class="tag">Not met</div></div>
+  <div class="crit pa reveal"><div class="txt"><div class="nm">Transparency</div><div class="de">Report, tables, thematic notes and eight appendices published, including the weighting note. Questionnaires, metadata and microdata are missing.</div></div><div class="tag">Partial</div></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Accessibility</div><div class="de">Publications freely available as PDFs, with no registration or fee. Thematic indexing could be improved.</div></div><div class="tag">Met</div></div>
+  <div class="crit pa reveal"><div class="txt"><div class="nm">Independence</div><div class="de">Joint production, with ILO review. Operation led by a line ministry; no editorial responsibility or publication schedule stated.</div></div><div class="tag">Partial</div></div>
+  <div class="crit ok reveal"><div class="txt"><div class="nm">Internal consistency</div><div class="de">Counts, rates and breakdowns align without contradiction.</div></div><div class="tag">Met</div></div>
+
+  <p style="margin-top:24px"><strong>Yes, the national rate of 17.4% can be considered reliable: it is properly defined and measured, its precision is known, and its methodology is public.</strong> Provincial rates cannot, as the report itself states. And all the counts rest on a demographic baseline made obsolete by the 2026 census.</p>
+</section>
+
+<section id="reco">
+  <h2><span class="n">8</span>Six measures that cost almost nothing</h2>
+  <div class="rule"></div>
+  <div class="rec reveal"><div class="r1"><div class="rt">1. Publish the questionnaires</div><div class="rd">The most useful missing item: it would show how the line between unemployment, inactivity and potential labour force was drawn.</div></div><div class="rh">No cost</div></div>
+  <div class="rec reveal"><div class="r1"><div class="rt">2. Flag precision</div><div class="rd">Add a coefficient-of-variation column to every table by stratum, with an explicit warning for fragile estimates.</div></div><div class="rh">No cost</div></div>
+  <div class="rec reveal"><div class="r1"><div class="rt">3. Reconcile the population counts</div><div class="rd">Publish a note explaining the change from 2,031,882 to 3,518,621 people and the resulting revision to labour-market counts.</div></div><div class="rh">Urgent</div></div>
+  <div class="rec reveal"><div class="r1"><div class="rt">4. Publish metadata</div><div class="rd">Provide a standardized profile describing the operation, its reference period, definitions and limitations.</div></div><div class="rh">12 months</div></div>
+  <div class="rec reveal"><div class="r1"><div class="rt">5. Bridge 2010 and 2024</div><div class="rd">Since international standards were revised in 2013, a methodological note would make the comparison of the three indicators more robust.</div></div><div class="rh">12 months</div></div>
+  <div class="rec reveal"><div class="r1"><div class="rt">6. Submit the data to ILOSTAT</div><div class="rd">Until the results are submitted, international comparisons will continue to rely on a modelled estimate.</div></div><div class="rh">No cost</div></div>
+
+  <div class="note">Two initiatives are already underway, and it would be unfair not to acknowledge them: in August 2026, INSTAT received a support mission to prepare the Harmonized Survey on Household Living Conditions, as well as technical assistance to establish the governing bodies of the national statistical system. <b>Updating the sampling frame and clarifying governance are therefore not starting from zero.</b></div>
+
+  <h3>Above all: the participation rate</h3>
+  <p>The 49.5% participation rate is economically more significant than the unemployment rate, yet it went largely unnoticed. It should be broken down by sex, age and place of residence, and the available differences should be discussed: participation is higher in rural areas (57.7%) than in urban areas (48.4%), while international migrants have an unemployment rate of 5.2% compared with 22.1% for non-migrants. These differences call for targeted policies.</p>
+</section>
+
+<section id="conclusion">
+  <h2><span class="n">9</span>Conclusion</h2>
+  <div class="rule"></div>
+  <p>An official figure is a promise to citizens: that, if they wish, they can verify how it was produced. ENEC 2024 keeps that promise in substance. It is serious work, and it deserves to be recognized as such.</p>
+  <p>Three tasks remain. The simplest is the audit trail: publish the questionnaires, metadata and an anonymized microdata file so Gabonese universities can work with the data rather than its summary. The most urgent is the demographic baseline. The most demanding is regularity: a country that can produce a survey of this quality once every 14 years can learn to produce one every quarter.</p>
+  <p><strong>The national unemployment rate published by INSTAT Gabon can be considered reliable, provided it is read for what it is: a national estimate, known to within about one and a half percentage points, based on a demographic snapshot that has since been superseded by the 2026 census.</strong></p>
+</section>
+
+<section id="sources">
+  <h2><span class="n">10</span>Key sources</h2>
+  <div class="rule"></div>
+  <p style="font-size:15px;color:var(--gris);font-style:italic">All webpages were accessed on September 12, 2026. The complete list appears in the Word version of the report.</p>
+  <div class="refs">
+    <p>Directorate General of Employment and Directorate General of Statistics (2026). <em>Employment, unemployment and working conditions in Gabon in 2024 — summary report, tables and charts, thematic notes.</em> Libreville, April 29, 2026. <a href="https://new.instatgabon.org/enec/">new.instatgabon.org/enec</a></p>
+    <p>National Agency for Statistics and Demography (2026). <em>National Employment Survey in Senegal, Q1 2026.</em> <a href="https://www.ansd.sn/Indicateur/enquete-emploi">ansd.sn</a></p>
+    <p>International Labour Organization (2013). <em>Resolution concerning statistics of work, employment and labour underutilization, 19th ICLS.</em> <a href="https://www.ilo.org/fr/media/209356/download">ilo.org</a></p>
+    <p>Gabonactu (2026). <em>RGPL: Gabon now officially has 3,518,621 inhabitants.</em> <a href="https://gabonactu.com/blog/2026/08/27/rgpl-le-gabon-compte-desormais-officiellement-3-518-621-habitants/">gabonactu.com</a></p>
+    <p>National Institute of Statistics of Cameroon (2023). <em>EESI 3 — Phase 1: Employment Survey.</em> <a href="https://ins-cameroun.cm/statistique/eesi3-phase-1-enquete-sur-lemploi-rapport-principal/">ins-cameroun.cm</a></p>
+    <p>INSEE (2024). <em>The essentials on… unemployment.</em> <a href="https://www.insee.fr/fr/statistiques/4805248">insee.fr</a></p>
+    <p>Statistics Canada (2024). <em>Labour Force Survey — definitions, data sources and methods.</em> <a href="https://www23.statcan.gc.ca/imdb/p2SV_f.pl?Function=getSurvey&amp;SDDS=3701">statcan.gc.ca</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="in">
+  <div class="q">“A statistic earns authority only when it is willing to be challenged. This one has made that possible, and that is already a great deal.”</div>
+  <div>Franklin Assoumou-Ndong — Statistics analyst. Ottawa, September 12, 2026.</div>
+  <div style="margin-top:14px;font-style:italic;color:#7FAAD0">Independent analysis, produced in a personal capacity and based solely on public sources. It does not represent any employer, government department or partner organization.</div>
+</div></footer>
+
+<script>
+(function(){
+  var bar=document.getElementById('progress'), nav=document.getElementById('nav');
+  function onScroll(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?(window.scrollY/h*100):0)+'%';
+    nav.classList.toggle('on', window.scrollY>420);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el=e.target; el.classList.add('on');
+      el.querySelectorAll('.fill').forEach(function(f,i){
+        setTimeout(function(){ f.style.width=f.dataset.w+'%'; }, 90*i);
+      });
+      var c=el.querySelector('[data-count]')||(el.hasAttribute&&el.hasAttribute('data-count')?el:null);
+      io.unobserve(el);
+    });
+  },{threshold:.22});
+  document.querySelectorAll('.reveal').forEach(function(el,i){
+    el.style.transitionDelay=(Math.min(i,6)*40)+'ms'; io.observe(el);
+  });
+
+  // compteur du grand chiffre
+  var big=document.querySelector('[data-count]');
+  if(big){
+    var target=17.4, started=false;
+    var io2=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting&&!started){
+          started=true; var t0=null;
+          function step(ts){
+            if(!t0) t0=ts; var k=Math.min((ts-t0)/900,1);
+            var v=(target*(1-Math.pow(1-k,3))).toFixed(1);
+            big.textContent=v+'%';
+            if(k<1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+      });
+    },{threshold:.4});
+    io2.observe(big);
+  }
+
+  document.querySelectorAll('.tog button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var w=b.parentElement; w.classList.toggle('open');
+      b.querySelector('.sign').textContent=w.classList.contains('open')?'–':'+';
+    });
+  });
+})();
+</script>
+</body>
 </html>
