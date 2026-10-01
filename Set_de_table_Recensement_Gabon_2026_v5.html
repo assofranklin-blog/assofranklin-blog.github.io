@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gabon 2026 · Anatomie d'un chiffre</title>
+<meta name="description" content="Le recensement gabonais de 2026 établit la population à 3 518 621 habitants. Décomposition statistique de ce chiffre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vert:#00A566;
+    --vert-f:#007A4A;
+    --jaune:#FCD116;
+    --bleu:#3F7FD1;
+    --nuit:#05201A;
+    --nuit-2:#0A3128;
+    --nuit-3:#0F4034;
+    --ivoire:#F6F2E6;
+    --craie:rgba(246,242,230,.62);
+    --craie-f:rgba(246,242,230,.34);
+    --mat-pad:clamp(20px,4.2vw,52px);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    background:
+      radial-gradient(120% 70% at 12% -8%, #10493A 0%, transparent 58%),
+      radial-gradient(90% 60% at 92% 104%, #0A3A45 0%, transparent 60%),
+      var(--nuit);
+    color:var(--ivoire);
+    font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+    display:flex; justify-content:center;
+    padding:clamp(10px,2.5vw,40px);
+    min-height:100vh;
+    line-height:1.5;
+  }
+
+  /* ---------- le set de table ---------- */
+  .mat{
+    width:min(1040px,100%);
+    background:
+      linear-gradient(180deg, var(--nuit-2) 0%, #072A22 55%, #06251F 100%);
+    border-radius:4px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(246,242,230,.09);
+  }
+  /* filet supérieur : simple repère graphique, sans valeur emblématique */
+  .mat::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:4px;
+    background:linear-gradient(90deg,var(--vert-f),var(--vert) 55%,rgba(0,165,102,0) 100%);
+  }
+  /* la piqûre du set, comme un ourlet imprimé */
+  .mat::after{
+    content:"";position:absolute;inset:14px;
+    border:1px dashed rgba(246,242,230,.13);
+    border-radius:2px;pointer-events:none;
+  }
+
+  .zone{
+    padding:calc(var(--mat-pad)*.86) var(--mat-pad);
+    border-bottom:1px solid rgba(246,242,230,.11);
+    position:relative;
+  }
+  .zone:last-of-type{border-bottom:0}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(9px,1.05vw,11px);
+    letter-spacing:.19em;text-transform:uppercase;
+    color:var(--jaune);
+    margin-bottom:clamp(12px,1.6vw,18px);
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:rgba(252,209,22,.28);min-width:24px}
+
+  /* ---------- en-tête ---------- */
+  .head{padding-top:calc(var(--mat-pad)*1.05)}
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(9px,1.05vw,11px);letter-spacing:.18em;text-transform:uppercase;
+    color:var(--craie);margin-bottom:18px;
+  }
+  .headline{
+    display:flex;align-items:flex-end;gap:clamp(16px,3vw,38px);
+    flex-wrap:wrap;
+  }
+  .bignum{
+    font-family:'Archivo',sans-serif;font-weight:900;
+    font-size:clamp(52px,10.6vw,116px);
+    line-height:.82;letter-spacing:-.028em;
+    color:var(--ivoire);
+    font-variant-numeric:tabular-nums;
+    text-shadow:0 0 60px rgba(0,165,102,.28);
+  }
+  .bignum .unit{
+    display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:600;
+    font-size:clamp(12px,1.55vw,16px);letter-spacing:.02em;
+    color:var(--craie);margin-top:16px;line-height:1.35;max-width:34ch;
+  }
+  .stamp{
+    border:1.5px solid var(--jaune);border-radius:2px;
+    padding:12px 16px 13px;
+    font-family:'IBM Plex Mono',monospace;
+    margin-bottom:6px;
+  }
+  .stamp b{display:block;font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:clamp(21px,3.1vw,32px);color:var(--jaune);line-height:1;letter-spacing:-.01em}
+  .stamp span{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+    color:rgba(252,209,22,.72);margin-top:7px}
+
+  .title{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:clamp(19px,2.5vw,27px);letter-spacing:-.012em;
+    color:var(--ivoire);margin-bottom:9px;line-height:1.15;
+  }
+  .lede{font-size:clamp(13px,1.42vw,15.5px);color:var(--craie);max-width:66ch}
+
+  /* ---------- l'équation ---------- */
+  .eq-steps{
+    display:flex;align-items:center;gap:clamp(8px,1.5vw,18px);
+    flex-wrap:wrap;margin-bottom:clamp(20px,2.8vw,30px);
+  }
+  .step{flex:0 0 auto}
+  .step .v{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:clamp(18px,2.7vw,30px);line-height:1;letter-spacing:-.015em;
+    font-variant-numeric:tabular-nums;
+  }
+  .step .k{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--craie-f);margin-top:8px;max-width:19ch;line-height:1.45;
+  }
+  .op{
+    font-family:'Archivo',sans-serif;font-weight:700;
+    font-size:clamp(15px,2vw,22px);color:var(--vert);opacity:.85;
+    padding-bottom:16px;
+  }
+  .op.q{color:var(--jaune)}
+
+  .bar{
+    height:clamp(46px,6.4vw,64px);width:100%;
+    display:flex;border-radius:3px;overflow:hidden;
+    background:rgba(246,242,230,.07);
+    box-shadow:inset 0 0 0 1px rgba(246,242,230,.12);
+  }
+  .seg{
+    display:flex;align-items:center;padding:0 clamp(10px,1.6vw,18px);
+    font-family:'IBM Plex Mono',monospace;font-size:clamp(10px,1.22vw,13px);
+    font-weight:600;white-space:nowrap;overflow:hidden;
+    width:0;transition:width 1.5s cubic-bezier(.16,.84,.34,1);
+  }
+  .seg-attendu{background:linear-gradient(90deg,var(--vert-f),var(--vert));color:#04241A}
+  .seg-gap{
+    color:#3B2F00;
+    background:
+      repeating-linear-gradient(-45deg,var(--jaune) 0 9px,#E0B900 9px 18px);
+    transition-delay:.75s;
+    position:relative;
+  }
+  .barlabels{
+    display:flex;justify-content:space-between;gap:14px;margin-top:12px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--craie-f);
+    letter-spacing:.05em;
+  }
+  .barlabels b{color:var(--jaune);font-weight:600}
+  .eq-note{
+    margin-top:clamp(16px,2.2vw,22px);padding-left:16px;
+    border-left:2px solid var(--jaune);
+    font-size:clamp(12.5px,1.4vw,15px);color:var(--craie);max-width:72ch;
+  }
+
+  /* ---------- trois cartes ---------- */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.8vw,22px)}
+  .card{
+    background:rgba(246,242,230,.045);
+    border-top:2px solid var(--bleu);
+    padding:clamp(14px,1.9vw,20px);
+    border-radius:2px;
+  }
+  .card:nth-child(2){border-top-color:var(--jaune)}
+  .card:nth-child(3){border-top-color:var(--vert)}
+  .card .n{
+    font-family:'Archivo',sans-serif;font-weight:900;
+    font-size:clamp(26px,4.1vw,44px);line-height:.95;letter-spacing:-.025em;
+    color:var(--bleu);font-variant-numeric:tabular-nums;
+  }
+  .card:nth-child(2) .n{color:var(--jaune)}
+  .card:nth-child(3) .n{color:var(--vert)}
+  .card .t{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ivoire);margin:12px 0 8px;
+  }
+  .card .d{font-size:clamp(12px,1.32vw,13.8px);color:var(--craie);line-height:1.55}
+
+  /* ---------- provinces ---------- */
+  .provhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .toggle{display:flex;border:1px solid rgba(246,242,230,.25);border-radius:2px;overflow:hidden;flex:0 0 auto}
+  .toggle button{
+    background:none;border:0;cursor:pointer;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.11em;
+    padding:8px 15px;color:var(--craie);transition:background .25s,color .25s;
+  }
+  .toggle button[aria-pressed="true"]{background:var(--jaune);color:#33290A;font-weight:600}
+  .toggle button:focus-visible{outline:2px solid var(--bleu);outline-offset:2px}
+
+  .prov{margin-top:clamp(16px,2.2vw,22px);display:grid;gap:clamp(7px,.95vw,10px)}
+  .prow{display:grid;grid-template-columns:clamp(88px,13vw,142px) 1fr clamp(66px,9vw,88px);
+    align-items:center;gap:clamp(8px,1.3vw,14px)}
+  .pname{font-size:clamp(11px,1.24vw,13.2px);color:var(--ivoire);white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .ptrack{height:clamp(15px,2.1vw,21px);background:rgba(246,242,230,.07);border-radius:2px;overflow:hidden}
+  .pfill{height:100%;width:0;border-radius:2px;
+    background:linear-gradient(90deg,var(--vert-f),var(--vert));
+    transition:width .95s cubic-bezier(.16,.84,.34,1);}
+  .prow.lead .pfill{background:linear-gradient(90deg,#E0B900,var(--jaune))}
+  .pval{font-family:'IBM Plex Mono',monospace;font-size:clamp(10px,1.16vw,12.4px);
+    text-align:right;color:var(--craie);font-variant-numeric:tabular-nums}
+  .prow.lead .pval{color:var(--jaune)}
+  .provfoot{margin-top:clamp(16px,2.2vw,20px);font-size:clamp(12px,1.34vw,14px);color:var(--craie);max-width:74ch}
+
+  /* ---------- comparaison / méthodes ---------- */
+  .cmp{display:grid;gap:clamp(9px,1.2vw,12px);margin-top:6px}
+  .crow{display:grid;grid-template-columns:clamp(118px,17vw,190px) 1fr clamp(52px,7vw,66px);
+    align-items:center;gap:clamp(8px,1.3vw,14px)}
+  .cname{font-size:clamp(11.5px,1.26vw,13.4px);color:var(--ivoire)}
+  .cname i{display:block;font-style:normal;font-size:10px;color:var(--craie-f);
+    font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;margin-top:2px}
+  .ctrack{height:clamp(9px,1.25vw,13px);background:rgba(246,242,230,.07);border-radius:2px;overflow:hidden}
+  .cfill{height:100%;width:0;background:var(--bleu);border-radius:2px;
+    transition:width 1.05s cubic-bezier(.16,.84,.34,1)}
+  .crow.hot .cfill{background:var(--jaune)}
+  .cval{font-family:'IBM Plex Mono',monospace;font-size:clamp(10.5px,1.18vw,12.6px);
+    text-align:right;color:var(--craie);font-variant-numeric:tabular-nums}
+  .crow.hot .cval{color:var(--jaune);font-weight:600}
+
+  .meth{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.5vw,18px);margin-top:6px}
+  .mcell{border-left:2px solid var(--vert);padding-left:clamp(10px,1.3vw,14px)}
+  .mcell:last-child{border-left-color:var(--jaune)}
+  .mcell h4{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(13px,1.5vw,16px);
+    color:var(--ivoire);margin-bottom:7px;letter-spacing:-.005em}
+  .mcell:last-child h4{color:var(--jaune)}
+  .mcell p{font-size:clamp(11.5px,1.24vw,13px);color:var(--craie);line-height:1.5}
+
+  /* ---------- pied ---------- */
+  .foot{
+    padding:calc(var(--mat-pad)*.72) var(--mat-pad) calc(var(--mat-pad)*.9);
+    background:rgba(0,0,0,.22);
+    display:block;
+  }
+  .foot .byline{font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;
+    color:var(--ivoire);letter-spacing:0;margin-bottom:8px;max-width:none}
+  .foot .disclaim{color:var(--craie);margin-bottom:14px;max-width:78ch}
+  .foot p{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--craie-f);
+    letter-spacing:.05em;line-height:1.7;max-width:64ch}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:760px){
+    .grid3{grid-template-columns:1fr}
+    .meth{grid-template-columns:1fr 1fr}
+    .headline{gap:20px}
+    .stamp{margin-bottom:0}
+  }
+  @media (max-width:470px){
+    .meth{grid-template-columns:1fr}
+    .prow{grid-template-columns:78px 1fr 62px}
+    .crow{grid-template-columns:100px 1fr 48px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .seg,.pfill,.cfill{transition:none!important}
+  }
+
+  @media print{
+    body{background:var(--nuit);padding:0}
+    .mat{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<main class="mat" id="mat">
+
+  <!-- EN-TÊTE -->
+  <section class="zone head">
+    <p class="kicker">Recensement général de la population et des logements · Gabon · 2026</p>
+    <div class="headline">
+      <div>
+        <div class="bignum"><span id="count">0</span>
+          <span class="unit">habitants, chiffre homologué le 27 août 2026 par la juridiction constitutionnelle. Le recensement de 2013 en dénombrait 1 811 079.</span>
+        </div>
+      </div>
+      <div class="stamp">
+        <b>+94,3 %</b>
+        <span>en 13 ans · 5,24 % par an</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- L'ÉQUATION -->
+  <section class="zone" id="zone-eq">
+    <p class="eyebrow">Le calcul</p>
+    <h2 class="title">L'équation qui ne boucle pas</h2>
+    <p class="lede">Une population ne varie que de quatre façons : les naissances, les décès, les entrées, les sorties. Le calcul applique un accroissement naturel de 2,35 % par an, déduit des enquêtes de la Direction générale de la statistique du Gabon elle-même — l'EDSG-III mesure 31,3 naissances pour mille. C'est une hypothèse basse, donc favorable au chiffre officiel.</p>
+
+    <div class="eq-steps" style="margin-top:clamp(20px,2.6vw,28px)">
+      <div class="step">
+        <div class="v" style="color:var(--ivoire)">1 811 079</div>
+        <div class="k">Recensés en 2013</div>
+      </div>
+      <div class="op">+</div>
+      <div class="step">
+        <div class="v" style="color:var(--vert)">638 432</div>
+        <div class="k">Naissances moins décès, 13 ans</div>
+      </div>
+      <div class="op">=</div>
+      <div class="step">
+        <div class="v" style="color:var(--vert)">2 449 511</div>
+        <div class="k">Attendus en 2026</div>
+      </div>
+      <div class="op q">+ ?</div>
+      <div class="step">
+        <div class="v" style="color:var(--jaune)">1 069 110</div>
+        <div class="k">Écart à documenter</div>
+      </div>
+    </div>
+
+    <div class="bar" role="img" aria-label="Barre : 2 449 511 habitants attendus, puis 1 069 110 habitants d'écart à documenter, pour un total de 3 518 621.">
+      <div class="seg seg-attendu" data-w="69.6"><span>2 449 511 attendus</span></div>
+      <div class="seg seg-gap" data-w="30.4"><span>1 069 110 à expliquer</span></div>
+    </div>
+    <div class="barlabels">
+      <span>Croissance naturelle seule</span>
+      <span><b>30,4 % du total reste à documenter</b></span>
+    </div>
+
+    <p class="eq-note">Pour combler cet écart par l'immigration, il faudrait <strong>82 239 arrivées nettes par an pendant treize ans</strong>, soit près de quatre fois toute la population étrangère que le Gabon comptait en 2013. L'écart ne vient donc pas d'un désaccord avec l'étranger : il est interne aux données gabonaises.</p>
+  </section>
+
+  <!-- TROIS CHIFFRES -->
+  <section class="zone" id="zone-trois">
+    <p class="eyebrow">Trois chiffres qui coincent</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="n">41 %</div>
+        <div class="t">Étrangers requis</div>
+        <p class="d">La part d'étrangers qu'il faudrait dans la population pour expliquer l'écart. La Côte d'Ivoire, pays d'immigration ancien, en comptait 22 % en 2021 — part en recul depuis 1975.</p>
+      </div>
+      <div class="card">
+        <div class="n">62,1 %</div>
+        <div class="t">Concentrés dans l'Estuaire</div>
+        <p class="d">Une seule province sur neuf abriterait six habitants sur dix, et absorberait 75,5 % de la croissance du pays — alors que sa fécondité est la plus basse du territoire.</p>
+      </div>
+      <div class="card">
+        <div class="n">920 200</div>
+        <div class="t">Électeurs inscrits en 2025</div>
+        <p class="d">Avec 87 % de participation officielle, ce fichier correspond à une population totale de 2,2 à 2,9 millions d'habitants, pas 3,5.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVINCES -->
+  <section class="zone" id="zone-prov">
+    <div class="provhead">
+      <div>
+        <p class="eyebrow">Les neuf provinces</p>
+        <h2 class="title">Un pays qui bascule dans un seul coin</h2>
+      </div>
+      <div class="toggle" role="group" aria-label="Choisir l'année affichée">
+        <button id="b2013" aria-pressed="false">2013</button>
+        <button id="b2026" aria-pressed="true">2026</button>
+      </div>
+    </div>
+    <div class="prov" id="prov"></div>
+    <p class="provfoot">De 2013 à 2026, l'Estuaire passerait de 895 689 à 2 184 908 habitants, soit 7,10 % par an. Les huit autres provinces réunies progressent de 2,94 % par an : elles n'ont donc rien perdu, et la migration interne ne peut pas alimenter l'Estuaire.</p>
+    <p class="eq-note" style="margin-top:clamp(16px,2.2vw,20px)">D'après l'enquête de la Direction générale de la statistique, l'Estuaire a la fécondité la plus basse du pays — 4,1 enfants par femme — et l'Ogooué-Ivindo la plus élevée, 6,7. Or c'est l'Estuaire qui croît le plus vite, et l'Ogooué-Lolo, à 5,3, le plus lentement. <strong>La corrélation entre fécondité et croissance est négative.</strong></p>
+  </section>
+
+  <!-- COMPARAISON -->
+  <section class="zone" id="zone-cmp">
+    <p class="eyebrow">Le rythme, comparé</p>
+    <h2 class="title">5,24 % par an, c'est combien ?</h2>
+    <p class="lede" style="margin-bottom:clamp(18px,2.4vw,24px)">Taux d'accroissement annuel moyen entre deux recensements. Au-delà de 5 % sur une décennie, on ne trouve que les pétromonarchies du Golfe et les pays d'accueil de réfugiés. Le Congo voisin, qui a lui aussi presque doublé sa population, l'a fait à 3,2 % par an.</p>
+    <div class="cmp" id="cmp"></div>
+  </section>
+
+  <!-- MÉTHODES -->
+  <section class="zone" id="zone-meth">
+    <p class="eyebrow">Ce que font les autres</p>
+    <h2 class="title">Un bon recensement ne prétend pas être exact. Il publie son erreur.</h2>
+    <div class="meth" style="margin-top:clamp(18px,2.4vw,24px)">
+      <div class="mcell">
+        <h4>Canada</h4>
+        <p>Trois études de couverture indépendantes depuis 1961. Sous-dénombrement net publié : 3,00 %, à ± 0,2 point.</p>
+      </div>
+      <div class="mcell">
+        <h4>France</h4>
+        <p>Collecte continue étalée sur cinq ans depuis 2004. Méthode, pondérations et ajustements intégralement documentés.</p>
+      </div>
+      <div class="mcell">
+        <h4>Côte d'Ivoire</h4>
+        <p>Enquête post-censitaire menée en 2022 auprès d'un échantillon, avant toute publication définitive.</p>
+      </div>
+      <div class="mcell">
+        <h4>Gabon</h4>
+        <p>Auditions de gouverneurs, préfets et chefs de village. Taux de couverture de 97 % annoncé, mais aucune correction appliquée.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIED -->
+  <footer class="foot">
+    <p class="disclaim"><strong>L'État le dit lui-même.</strong> «&nbsp;Une entrave majeure à l'élaboration de politiques publiques fondées sur des preuves.&nbsp;» C'est ainsi que le Rapport national sur le développement humain 2026, publié par le ministère de la Planification et de la Prospective, qualifie la rareté de données statistiques fiables au Gabon. Ce même rapport situe l'IDH gabonais à 0,693 : diviser le revenu par habitant par 1,33 le ferait reculer d'environ 0,014 point.</p>
+    <p class="disclaim"><strong>Une publication en cours.</strong> Ces chiffres sont ceux des résultats globaux proclamés le 27 août 2026. Le Bureau central du recensement a annoncé des analyses approfondies à venir. Plusieurs des données qui manquent ici — âges, nationalité, ménages, logements — seront vraisemblablement publiées prochainement, et pourraient confirmer le chiffre autant que l'infirmer. C'est leur diffusion rapide qui est en jeu, pas la bonne foi de qui les produit.</p>
+    <p class="byline">Franklin Assoumou-Ndong · Analyste en statistique</p>
+    <p class="disclaim">Analyse critique réalisée avec le support de l'intelligence artificielle. L'auteur en assume l'intégralité du contenu après vérification et validation. Ce document n'engage que son auteur, à l'exclusion de tout employeur ou organisation partenaire.</p>
+    <p>Sources · INSTAT Gabon (ex-Direction générale de la statistique) — Résultats globaux du RGPL 2013 (2015), EDSG-II 2012 et EDSG-III 2019-2021, Rapport national sur le développement humain 2026 · Résultats du RGPL 2026 homologués le 27 août 2026 · Nations unies, World Population Prospects 2024 · Institut national de la statistique de Côte d'Ivoire, RGPH 2021 · Institut national de la statistique du Congo, RGPH-5 2023 · BUCREP Cameroun, RGPH 2005 · Statistique Canada, Rapport technique sur la couverture 2021 · Insee, recensement rénové. Point de presse du Bureau central du recensement, 10 juin 2026. Calculs de l'auteur, 29 août 2026.</p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nf = new Intl.NumberFormat('fr-FR');
+
+  /* ---------- données ---------- */
+  var provinces = [
+    {n:'Estuaire',        a:895689, b:2184908},
+    {n:'Haut-Ogooué',     a:250799, b:297100},
+    {n:'Ogooué-Maritime', a:157562, b:292652},
+    {n:'Woleu-Ntem',      a:154986, b:242029},
+    {n:'Ngounié',         a:100838, b:159404},
+    {n:'Moyen-Ogooué',    a:69287,  b:105703},
+    {n:'Ogooué-Ivindo',   a:63293,  b:93482},
+    {n:'Ogooué-Lolo',     a:65771,  b:75128},
+    {n:'Nyanga',          a:52854,  b:68215}
+  ];
+  var MAXP = 2184908;
+
+  var compare = [
+    {n:'Gabon',        s:'2013 – 2026', v:5.24, hot:true},
+    {n:'Gabon',        s:'1993 – 2013 · record national antérieur', v:2.94},
+    {n:'Congo',        s:'2007 – 2023 · Afrique centrale', v:3.20},
+    {n:'Côte d\u2019Ivoire', s:'1998 – 2021 · pays d\u2019immigration de longue date', v:2.90},
+    {n:'Cameroun',     s:'1987 – 2005 · Afrique centrale', v:2.80},
+    {n:'Canada',       s:'2016 – 2021', v:1.00},
+    {n:'France',       s:'2017 – 2023', v:0.39}
+  ];
+  var MAXC = 5.24;
+
+  /* ---------- construction des provinces ---------- */
+  var provEl = document.getElementById('prov');
+  provinces.forEach(function(p, i){
+    var row = document.createElement('div');
+    row.className = 'prow' + (i === 0 ? ' lead' : '');
+    row.innerHTML =
+      '<span class="pname">' + p.n + '</span>' +
+      '<span class="ptrack"><span class="pfill"></span></span>' +
+      '<span class="pval"></span>';
+    provEl.appendChild(row);
+    p.el = row;
+  });
+
+  var year = 2026;
+  function paintProvinces(animate){
+    provinces.forEach(function(p){
+      var val = year === 2026 ? p.b : p.a;
+      var fill = p.el.querySelector('.pfill');
+      var out  = p.el.querySelector('.pval');
+      if(!animate) fill.style.transition = 'none';
+      fill.style.width = (val / MAXP * 100) + '%';
+      if(!animate) requestAnimationFrame(function(){ fill.style.transition = ''; });
+      out.textContent = nf.format(val);
+      p.el.querySelector('.ptrack').setAttribute('aria-label', p.n + ' : ' + nf.format(val) + ' habitants en ' + year);
+    });
+  }
+
+  var b13 = document.getElementById('b2013');
+  var b26 = document.getElementById('b2026');
+  function setYear(y){
+    year = y;
+    b13.setAttribute('aria-pressed', String(y === 2013));
+    b26.setAttribute('aria-pressed', String(y === 2026));
+    paintProvinces(true);
+  }
+  b13.addEventListener('click', function(){ setYear(2013); });
+  b26.addEventListener('click', function(){ setYear(2026); });
+
+  /* ---------- construction du comparatif ---------- */
+  var cmpEl = document.getElementById('cmp');
+  compare.forEach(function(c){
+    var row = document.createElement('div');
+    row.className = 'crow' + (c.hot ? ' hot' : '');
+    row.innerHTML =
+      '<span class="cname">' + c.n + '<i>' + c.s + '</i></span>' +
+      '<span class="ctrack"><span class="cfill"></span></span>' +
+      '<span class="cval">' + c.v.toFixed(2).replace('.', ',') + ' %</span>';
+    cmpEl.appendChild(row);
+    c.el = row;
+  });
+
+  /* ---------- compteur d'en-tête ---------- */
+  var TARGET = 3518621;
+  var out = document.getElementById('count');
+  function runCount(){
+    if(reduce){ out.textContent = nf.format(TARGET); return; }
+    var t0 = null, dur = 1900;
+    function tick(ts){
+      if(t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 4);
+      out.textContent = nf.format(Math.round(TARGET * e));
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- révélation au défilement ---------- */
+  function reveal(zoneId, fn){
+    var z = document.getElementById(zoneId);
+    if(!z || !('IntersectionObserver' in window)){ fn(); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ fn(); io.disconnect(); }
+      });
+    }, {threshold: 0.28});
+    io.observe(z);
+  }
+
+  reveal('zone-eq', function(){
+    document.querySelectorAll('.seg').forEach(function(s){
+      s.style.width = s.dataset.w + '%';
+    });
+  });
+  reveal('zone-prov', function(){ paintProvinces(true); });
+  reveal('zone-cmp', function(){
+    compare.forEach(function(c, i){
+      setTimeout(function(){
+        c.el.querySelector('.cfill').style.width = (c.v / MAXC * 100) + '%';
+      }, i * 110);
+    });
+  });
+
+  runCount();
+})();
+</script>
+</body>
+</html>
