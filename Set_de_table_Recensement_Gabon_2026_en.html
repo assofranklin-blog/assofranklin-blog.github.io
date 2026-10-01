@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gabon 2026 · Anatomy of a figure</title>
+<meta name="description" content="Gabon’s 2026 census puts the population at 3,518,621. An interactive statistical breakdown of the figure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vert:#00A566;
+    --vert-f:#007A4A;
+    --jaune:#FCD116;
+    --bleu:#3F7FD1;
+    --nuit:#05201A;
+    --nuit-2:#0A3128;
+    --nuit-3:#0F4034;
+    --ivoire:#F6F2E6;
+    --craie:rgba(246,242,230,.62);
+    --craie-f:rgba(246,242,230,.34);
+    --mat-pad:clamp(20px,4.2vw,52px);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    background:
+      radial-gradient(120% 70% at 12% -8%, #10493A 0%, transparent 58%),
+      radial-gradient(90% 60% at 92% 104%, #0A3A45 0%, transparent 60%),
+      var(--nuit);
+    color:var(--ivoire);
+    font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+    display:flex; justify-content:center;
+    padding:clamp(10px,2.5vw,40px);
+    min-height:100vh;
+    line-height:1.5;
+  }
+
+  /* ---------- the placemat ---------- */
+  .mat{
+    width:min(1040px,100%);
+    background:
+      linear-gradient(180deg, var(--nuit-2) 0%, #072A22 55%, #06251F 100%);
+    border-radius:4px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(246,242,230,.09);
+  }
+  /* filet supérieur : simple repère graphique, sans valeur emblématique */
+  .mat::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:4px;
+    background:linear-gradient(90deg,var(--vert-f),var(--vert) 55%,rgba(0,165,102,0) 100%);
+  }
+  /* la piqûre du set, comme un ourlet imprimé */
+  .mat::after{
+    content:"";position:absolute;inset:14px;
+    border:1px dashed rgba(246,242,230,.13);
+    border-radius:2px;pointer-events:none;
+  }
+
+  .zone{
+    padding:calc(var(--mat-pad)*.86) var(--mat-pad);
+    border-bottom:1px solid rgba(246,242,230,.11);
+    position:relative;
+  }
+  .zone:last-of-type{border-bottom:0}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(9px,1.05vw,11px);
+    letter-spacing:.19em;text-transform:uppercase;
+    color:var(--jaune);
+    margin-bottom:clamp(12px,1.6vw,18px);
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:rgba(252,209,22,.28);min-width:24px}
+
+  /* ---------- en-tête ---------- */
+  .head{padding-top:calc(var(--mat-pad)*1.05)}
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(9px,1.05vw,11px);letter-spacing:.18em;text-transform:uppercase;
+    color:var(--craie);margin-bottom:18px;
+  }
+  .headline{
+    display:flex;align-items:flex-end;gap:clamp(16px,3vw,38px);
+    flex-wrap:wrap;
+  }
+  .bignum{
+    font-family:'Archivo',sans-serif;font-weight:900;
+    font-size:clamp(52px,10.6vw,116px);
+    line-height:.82;letter-spacing:-.028em;
+    color:var(--ivoire);
+    font-variant-numeric:tabular-nums;
+    text-shadow:0 0 60px rgba(0,165,102,.28);
+  }
+  .bignum .unit{
+    display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:600;
+    font-size:clamp(12px,1.55vw,16px);letter-spacing:.02em;
+    color:var(--craie);margin-top:16px;line-height:1.35;max-width:34ch;
+  }
+  .stamp{
+    border:1.5px solid var(--jaune);border-radius:2px;
+    padding:12px 16px 13px;
+    font-family:'IBM Plex Mono',monospace;
+    margin-bottom:6px;
+  }
+  .stamp b{display:block;font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:clamp(21px,3.1vw,32px);color:var(--jaune);line-height:1;letter-spacing:-.01em}
+  .stamp span{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+    color:rgba(252,209,22,.72);margin-top:7px}
+
+  .title{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:clamp(19px,2.5vw,27px);letter-spacing:-.012em;
+    color:var(--ivoire);margin-bottom:9px;line-height:1.15;
+  }
+  .lede{font-size:clamp(13px,1.42vw,15.5px);color:var(--craie);max-width:66ch}
+
+  /* ---------- l'équation ---------- */
+  .eq-steps{
+    display:flex;align-items:center;gap:clamp(8px,1.5vw,18px);
+    flex-wrap:wrap;margin-bottom:clamp(20px,2.8vw,30px);
+  }
+  .step{flex:0 0 auto}
+  .step .v{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:clamp(18px,2.7vw,30px);line-height:1;letter-spacing:-.015em;
+    font-variant-numeric:tabular-nums;
+  }
+  .step .k{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--craie-f);margin-top:8px;max-width:19ch;line-height:1.45;
+  }
+  .op{
+    font-family:'Archivo',sans-serif;font-weight:700;
+    font-size:clamp(15px,2vw,22px);color:var(--vert);opacity:.85;
+    padding-bottom:16px;
+  }
+  .op.q{color:var(--jaune)}
+
+  .bar{
+    height:clamp(46px,6.4vw,64px);width:100%;
+    display:flex;border-radius:3px;overflow:hidden;
+    background:rgba(246,242,230,.07);
+    box-shadow:inset 0 0 0 1px rgba(246,242,230,.12);
+  }
+  .seg{
+    display:flex;align-items:center;padding:0 clamp(10px,1.6vw,18px);
+    font-family:'IBM Plex Mono',monospace;font-size:clamp(10px,1.22vw,13px);
+    font-weight:600;white-space:nowrap;overflow:hidden;
+    width:0;transition:width 1.5s cubic-bezier(.16,.84,.34,1);
+  }
+  .seg-attendu{background:linear-gradient(90deg,var(--vert-f),var(--vert));color:#04241A}
+  .seg-gap{
+    color:#3B2F00;
+    background:
+      repeating-linear-gradient(-45deg,var(--jaune) 0 9px,#E0B900 9px 18px);
+    transition-delay:.75s;
+    position:relative;
+  }
+  .barlabels{
+    display:flex;justify-content:space-between;gap:14px;margin-top:12px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--craie-f);
+    letter-spacing:.05em;
+  }
+  .barlabels b{color:var(--jaune);font-weight:600}
+  .eq-note{
+    margin-top:clamp(16px,2.2vw,22px);padding-left:16px;
+    border-left:2px solid var(--jaune);
+    font-size:clamp(12.5px,1.4vw,15px);color:var(--craie);max-width:72ch;
+  }
+
+  /* ---------- trois cartes ---------- */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.8vw,22px)}
+  .card{
+    background:rgba(246,242,230,.045);
+    border-top:2px solid var(--bleu);
+    padding:clamp(14px,1.9vw,20px);
+    border-radius:2px;
+  }
+  .card:nth-child(2){border-top-color:var(--jaune)}
+  .card:nth-child(3){border-top-color:var(--vert)}
+  .card .n{
+    font-family:'Archivo',sans-serif;font-weight:900;
+    font-size:clamp(26px,4.1vw,44px);line-height:.95;letter-spacing:-.025em;
+    color:var(--bleu);font-variant-numeric:tabular-nums;
+  }
+  .card:nth-child(2) .n{color:var(--jaune)}
+  .card:nth-child(3) .n{color:var(--vert)}
+  .card .t{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ivoire);margin:12px 0 8px;
+  }
+  .card .d{font-size:clamp(12px,1.32vw,13.8px);color:var(--craie);line-height:1.55}
+
+  /* ---------- provinces ---------- */
+  .provhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .toggle{display:flex;border:1px solid rgba(246,242,230,.25);border-radius:2px;overflow:hidden;flex:0 0 auto}
+  .toggle button{
+    background:none;border:0;cursor:pointer;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.11em;
+    padding:8px 15px;color:var(--craie);transition:background .25s,color .25s;
+  }
+  .toggle button[aria-pressed="true"]{background:var(--jaune);color:#33290A;font-weight:600}
+  .toggle button:focus-visible{outline:2px solid var(--bleu);outline-offset:2px}
+
+  .prov{margin-top:clamp(16px,2.2vw,22px);display:grid;gap:clamp(7px,.95vw,10px)}
+  .prow{display:grid;grid-template-columns:clamp(88px,13vw,142px) 1fr clamp(66px,9vw,88px);
+    align-items:center;gap:clamp(8px,1.3vw,14px)}
+  .pname{font-size:clamp(11px,1.24vw,13.2px);color:var(--ivoire);white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis}
+  .ptrack{height:clamp(15px,2.1vw,21px);background:rgba(246,242,230,.07);border-radius:2px;overflow:hidden}
+  .pfill{height:100%;width:0;border-radius:2px;
+    background:linear-gradient(90deg,var(--vert-f),var(--vert));
+    transition:width .95s cubic-bezier(.16,.84,.34,1);}
+  .prow.lead .pfill{background:linear-gradient(90deg,#E0B900,var(--jaune))}
+  .pval{font-family:'IBM Plex Mono',monospace;font-size:clamp(10px,1.16vw,12.4px);
+    text-align:right;color:var(--craie);font-variant-numeric:tabular-nums}
+  .prow.lead .pval{color:var(--jaune)}
+  .provfoot{margin-top:clamp(16px,2.2vw,20px);font-size:clamp(12px,1.34vw,14px);color:var(--craie);max-width:74ch}
+
+  /* ---------- comparaison / méthodes ---------- */
+  .cmp{display:grid;gap:clamp(9px,1.2vw,12px);margin-top:6px}
+  .crow{display:grid;grid-template-columns:clamp(118px,17vw,190px) 1fr clamp(52px,7vw,66px);
+    align-items:center;gap:clamp(8px,1.3vw,14px)}
+  .cname{font-size:clamp(11.5px,1.26vw,13.4px);color:var(--ivoire)}
+  .cname i{display:block;font-style:normal;font-size:10px;color:var(--craie-f);
+    font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;margin-top:2px}
+  .ctrack{height:clamp(9px,1.25vw,13px);background:rgba(246,242,230,.07);border-radius:2px;overflow:hidden}
+  .cfill{height:100%;width:0;background:var(--bleu);border-radius:2px;
+    transition:width 1.05s cubic-bezier(.16,.84,.34,1)}
+  .crow.hot .cfill{background:var(--jaune)}
+  .cval{font-family:'IBM Plex Mono',monospace;font-size:clamp(10.5px,1.18vw,12.6px);
+    text-align:right;color:var(--craie);font-variant-numeric:tabular-nums}
+  .crow.hot .cval{color:var(--jaune);font-weight:600}
+
+  .meth{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.5vw,18px);margin-top:6px}
+  .mcell{border-left:2px solid var(--vert);padding-left:clamp(10px,1.3vw,14px)}
+  .mcell:last-child{border-left-color:var(--jaune)}
+  .mcell h4{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(13px,1.5vw,16px);
+    color:var(--ivoire);margin-bottom:7px;letter-spacing:-.005em}
+  .mcell:last-child h4{color:var(--jaune)}
+  .mcell p{font-size:clamp(11.5px,1.24vw,13px);color:var(--craie);line-height:1.5}
+
+  /* ---------- footer ---------- */
+  .foot{
+    padding:calc(var(--mat-pad)*.72) var(--mat-pad) calc(var(--mat-pad)*.9);
+    background:rgba(0,0,0,.22);
+    display:block;
+  }
+  .foot .byline{font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;
+    color:var(--ivoire);letter-spacing:0;margin-bottom:8px;max-width:none}
+  .foot .disclaim{color:var(--craie);margin-bottom:14px;max-width:78ch}
+  .foot p{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--craie-f);
+    letter-spacing:.05em;line-height:1.7;max-width:64ch}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:760px){
+    .grid3{grid-template-columns:1fr}
+    .meth{grid-template-columns:1fr 1fr}
+    .headline{gap:20px}
+    .stamp{margin-bottom:0}
+  }
+  @media (max-width:470px){
+    .meth{grid-template-columns:1fr}
+    .prow{grid-template-columns:78px 1fr 62px}
+    .crow{grid-template-columns:100px 1fr 48px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .seg,.pfill,.cfill{transition:none!important}
+  }
+
+  @media print{
+    body{background:var(--nuit);padding:0}
+    .mat{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<main class="mat" id="mat">
+
+  <!-- HEADER -->
+  <section class="zone head">
+    <p class="kicker">General Population and Housing Census · Gabon · 2026</p>
+    <div class="headline">
+      <div>
+        <div class="bignum"><span id="count">0</span>
+          <span class="unit">residents, a figure certified by the Constitutional Court on August 27, 2026. The 2013 census counted 1,811,079.</span>
+        </div>
+      </div>
+      <div class="stamp">
+        <b>+94,3 %</b>
+        <span>over 13 years · 5.24% per year</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE EQUATION -->
+  <section class="zone" id="zone-eq">
+    <p class="eyebrow">The calculation</p>
+    <h2 class="title">The equation that does not add up</h2>
+    <p class="lede">Population changes in only four ways: births, deaths, people arriving and people leaving. This calculation applies natural increase of 2.35% per year, derived from surveys by Gabon’s own Directorate General of Statistics — the 2019–2021 EDSG-III measured 31.3 births per 1,000 people. This is a low estimate, and therefore one that favours the official figure.</p>
+
+    <div class="eq-steps" style="margin-top:clamp(20px,2.6vw,28px)">
+      <div class="step">
+        <div class="v" style="color:var(--ivoire)">1 811 079</div>
+        <div class="k">Counted in 2013</div>
+      </div>
+      <div class="op">+</div>
+      <div class="step">
+        <div class="v" style="color:var(--vert)">638 432</div>
+        <div class="k">Births minus deaths, over 13 years</div>
+      </div>
+      <div class="op">=</div>
+      <div class="step">
+        <div class="v" style="color:var(--vert)">2 449 511</div>
+        <div class="k">Expected in 2026</div>
+      </div>
+      <div class="op q">+ ?</div>
+      <div class="step">
+        <div class="v" style="color:var(--jaune)">1 069 110</div>
+        <div class="k">Gap to be explained</div>
+      </div>
+    </div>
+
+    <div class="bar" role="img" aria-label="Bar: 2,449,511 residents expected, plus a gap of 1,069,110 to be explained, for a total of 3,518,621.">
+      <div class="seg seg-attendu" data-w="69.6"><span>2,449,511 expected</span></div>
+      <div class="seg seg-gap" data-w="30.4"><span>1,069,110 to explain</span></div>
+    </div>
+    <div class="barlabels">
+      <span>Natural increase alone</span>
+      <span><b>30.4% of the total remains to be documented</b></span>
+    </div>
+
+    <p class="eq-note">To close this gap through immigration, Gabon would need <strong>82,239 net arrivals every year for 13 years</strong> — nearly four times the country’s entire foreign-born population in 2013. The gap is not caused by a disagreement with outside sources; it arises within Gabon’s own data.</p>
+  </section>
+
+  <!-- THREE KEY FIGURES -->
+  <section class="zone" id="zone-trois">
+    <p class="eyebrow">Three figures that raise questions</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="n">41 %</div>
+        <div class="t">Foreign-national share required</div>
+        <p class="d">The share of foreign nationals that would be needed to explain the gap. Côte d’Ivoire, a long-standing destination for migrants, recorded 22% in 2021 — a share that has declined since 1975.</p>
+      </div>
+      <div class="card">
+        <div class="n">62,1 %</div>
+        <div class="t">Concentrated in Estuaire</div>
+        <p class="d">One of the country’s nine provinces would be home to six in ten residents and account for 75.5% of national population growth, despite having the country’s lowest fertility rate.</p>
+      </div>
+      <div class="card">
+        <div class="n">920 200</div>
+        <div class="t">Registered voters in 2025</div>
+        <p class="d">With official voter turnout at 87%, the electoral register points to a total population of 2.2 to 2.9 million — not 3.5 million.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVINCES -->
+  <section class="zone" id="zone-prov">
+    <div class="provhead">
+      <div>
+        <p class="eyebrow">The nine provinces</p>
+        <h2 class="title">A country tipping toward one corner</h2>
+      </div>
+      <div class="toggle" role="group" aria-label="Choose the year shown">
+        <button id="b2013" aria-pressed="false">2013</button>
+        <button id="b2026" aria-pressed="true">2026</button>
+      </div>
+    </div>
+    <div class="prov" id="prov"></div>
+    <p class="provfoot">From 2013 to 2026, Estuaire would grow from 895,689 to 2,184,908 residents — 7.10% per year. The other eight provinces combined would grow by 2.94% per year: they did not lose population, so internal migration cannot account for Estuaire’s increase.</p>
+    <p class="eq-note" style="margin-top:clamp(16px,2.2vw,20px)">According to the Directorate General of Statistics survey, Estuaire has the country’s lowest fertility rate — 4.1 children per woman — while Ogooué-Ivindo has the highest, at 6.7. Yet Estuaire grows the fastest, while Ogooué-Lolo, at 5.3, grows the slowest. <strong>The correlation between fertility and population growth is negative.</strong></p>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="zone" id="zone-cmp">
+    <p class="eyebrow">Putting the rate in context</p>
+    <h2 class="title">What does 5.24% a year look like?</h2>
+    <p class="lede" style="margin-bottom:clamp(18px,2.4vw,24px)">Average annual population growth between two censuses. Rates above 5% over a decade are generally found only in Gulf petro-monarchies and countries receiving large numbers of refugees. Neighbouring Congo also nearly doubled its population, but at 3.2% per year.</p>
+    <div class="cmp" id="cmp"></div>
+  </section>
+
+  <!-- METHODS -->
+  <section class="zone" id="zone-meth">
+    <p class="eyebrow">How other countries do it</p>
+    <h2 class="title">A good census does not claim to be exact. It publishes its error.</h2>
+    <div class="meth" style="margin-top:clamp(18px,2.4vw,24px)">
+      <div class="mcell">
+        <h4>Canada</h4>
+        <p>Three independent coverage studies since 1961. Published net undercount: 3.00%, with a margin of ±0.2 percentage points.</p>
+      </div>
+      <div class="mcell">
+        <h4>France</h4>
+        <p>Continuous data collection spread over five years since 2004. Methods, weighting and adjustments are fully documented.</p>
+      </div>
+      <div class="mcell">
+        <h4>Côte d'Ivoire</h4>
+        <p>A post-enumeration survey of a sample was conducted in 2022 before any final results were published.</p>
+      </div>
+      <div class="mcell">
+        <h4>Gabon</h4>
+        <p>Consultations with governors, prefects and village chiefs. A 97% coverage rate was announced, but no adjustment was applied.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <p class="disclaim"><strong>The State says so itself.</strong> The 2026 National Human Development Report, published by the Ministry of Planning and Foresight, describes the shortage of reliable statistical data in Gabon as “a major obstacle to evidence-based public policymaking.” The same report puts Gabon’s Human Development Index at 0.693: dividing income per capita by 1.33 would lower it by about 0.014 points.</p>
+    <p class="disclaim"><strong>Results are still being published.</strong> These figures come from the overall results certified on August 27, 2026. The Central Census Bureau has announced that more detailed analyses will follow. Several missing data points — age, nationality, households and dwellings — are likely to be released and could either confirm or challenge the total. What matters is their timely release, not the good faith of those who produced the figures.</p>
+    <p class="byline">Franklin Assoumou-Ndong · Statistics analyst</p>
+    <p class="disclaim">This critical analysis was prepared with the support of artificial intelligence. The author takes full responsibility for its content after review and validation. This document represents the author’s views alone and not those of any employer or partner organization.</p>
+    <p>Sources · INSTAT Gabon (formerly the Directorate General of Statistics) — RGPL 2013 overall results (2015), EDSG-II 2012 and EDSG-III 2019–2021, 2026 National Human Development Report · RGPL 2026 results certified on August 27, 2026 · United Nations, World Population Prospects 2024 · Côte d’Ivoire National Institute of Statistics, RGPH 2021 · Congo National Institute of Statistics, RGPH-5 2023 · Cameroon BUCREP, RGPH 2005 · Statistics Canada, 2021 Census Technical Report on Coverage · Insee, redesigned census. Central Census Bureau press briefing, June 10, 2026. Author’s calculations, August 29, 2026.</p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nf = new Intl.NumberFormat('en-CA');
+
+  /* ---------- data ---------- */
+  var provinces = [
+    {n:'Estuaire',        a:895689, b:2184908},
+    {n:'Haut-Ogooué',     a:250799, b:297100},
+    {n:'Ogooué-Maritime', a:157562, b:292652},
+    {n:'Woleu-Ntem',      a:154986, b:242029},
+    {n:'Ngounié',         a:100838, b:159404},
+    {n:'Moyen-Ogooué',    a:69287,  b:105703},
+    {n:'Ogooué-Ivindo',   a:63293,  b:93482},
+    {n:'Ogooué-Lolo',     a:65771,  b:75128},
+    {n:'Nyanga',          a:52854,  b:68215}
+  ];
+  var MAXP = 2184908;
+
+  var compare = [
+    {n:'Gabon',        s:'2013 – 2026', v:5.24, hot:true},
+    {n:'Gabon',        s:'1993 – 2013 · previous national record', v:2.94},
+    {n:'Congo',        s:'2007 – 2023 · Central Africa', v:3.20},
+    {n:'Côte d\u2019Ivoire', s:'1998 – 2021 · long-standing destination for migrants', v:2.90},
+    {n:'Cameroon',     s:'1987 – 2005 · Central Africa', v:2.80},
+    {n:'Canada',       s:'2016 – 2021', v:1.00},
+    {n:'France',       s:'2017 – 2023', v:0.39}
+  ];
+  var MAXC = 5.24;
+
+  /* ---------- build province chart ---------- */
+  var provEl = document.getElementById('prov');
+  provinces.forEach(function(p, i){
+    var row = document.createElement('div');
+    row.className = 'prow' + (i === 0 ? ' lead' : '');
+    row.innerHTML =
+      '<span class="pname">' + p.n + '</span>' +
+      '<span class="ptrack"><span class="pfill"></span></span>' +
+      '<span class="pval"></span>';
+    provEl.appendChild(row);
+    p.el = row;
+  });
+
+  var year = 2026;
+  function paintProvinces(animate){
+    provinces.forEach(function(p){
+      var val = year === 2026 ? p.b : p.a;
+      var fill = p.el.querySelector('.pfill');
+      var out  = p.el.querySelector('.pval');
+      if(!animate) fill.style.transition = 'none';
+      fill.style.width = (val / MAXP * 100) + '%';
+      if(!animate) requestAnimationFrame(function(){ fill.style.transition = ''; });
+      out.textContent = nf.format(val);
+      p.el.querySelector('.ptrack').setAttribute('aria-label', p.n + ': ' + nf.format(val) + ' residents in ' + year);
+    });
+  }
+
+  var b13 = document.getElementById('b2013');
+  var b26 = document.getElementById('b2026');
+  function setYear(y){
+    year = y;
+    b13.setAttribute('aria-pressed', String(y === 2013));
+    b26.setAttribute('aria-pressed', String(y === 2026));
+    paintProvinces(true);
+  }
+  b13.addEventListener('click', function(){ setYear(2013); });
+  b26.addEventListener('click', function(){ setYear(2026); });
+
+  /* ---------- build comparison chart ---------- */
+  var cmpEl = document.getElementById('cmp');
+  compare.forEach(function(c){
+    var row = document.createElement('div');
+    row.className = 'crow' + (c.hot ? ' hot' : '');
+    row.innerHTML =
+      '<span class="cname">' + c.n + '<i>' + c.s + '</i></span>' +
+      '<span class="ctrack"><span class="cfill"></span></span>' +
+      '<span class="cval">' + c.v.toFixed(2) + '%</span>';
+    cmpEl.appendChild(row);
+    c.el = row;
+  });
+
+  /* ---------- headline counter ---------- */
+  var TARGET = 3518621;
+  var out = document.getElementById('count');
+  function runCount(){
+    if(reduce){ out.textContent = nf.format(TARGET); return; }
+    var t0 = null, dur = 1900;
+    function tick(ts){
+      if(t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 4);
+      out.textContent = nf.format(Math.round(TARGET * e));
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  function reveal(zoneId, fn){
+    var z = document.getElementById(zoneId);
+    if(!z || !('IntersectionObserver' in window)){ fn(); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ fn(); io.disconnect(); }
+      });
+    }, {threshold: 0.28});
+    io.observe(z);
+  }
+
+  reveal('zone-eq', function(){
+    document.querySelectorAll('.seg').forEach(function(s){
+      s.style.width = s.dataset.w + '%';
+    });
+  });
+  reveal('zone-prov', function(){ paintProvinces(true); });
+  reveal('zone-cmp', function(){
+    compare.forEach(function(c, i){
+      setTimeout(function(){
+        c.el.querySelector('.cfill').style.width = (c.v / MAXC * 100) + '%';
+      }, i * 110);
+    });
+  });
+
+  runCount();
+})();
+</script>
+</body>
+</html>
