@@ -143,8 +143,8 @@
     <h1>Le taux d’inflation publié par l’INSTAT Gabon est-il fiable ?</h1>
     <div class="auteur"><b>Franklin Assoumou Ndong</b>, analyste en statistique</div>
     <div class="actions">
-      <a class="bouton" id="lien-rapport" href="#">Télécharger le rapport complet (PDF, 21 pages)</a>
-      <a class="bouton creux" href="#verdict">Voir le verdict</a>       <a class="bouton creux" href="inflation_instat_gabon_interactif_en.html" lang="en-CA">English</a>
+      <a class="bouton" id="lien-rapport" href="#">Télécharger le rapport complet (Word, 21 pages)</a>
+      <a class="bouton creux" href="#verdict">Voir le verdict</a>
     </div>
   </div>
 </header>
@@ -156,7 +156,7 @@
       <div><div class="gros rouge">Vie chère</div><p>Priorité gouvernementale en 2026 : mercuriale de prix plafonds, suspension de la taxe sur la valeur ajoutée sur une centaine de produits, centrale d’achat.</p></div>
     </div>
   </div>
-  <div class="liaison"><div class="enveloppe">Les deux peuvent être vrais en même temps. <b>Mais aujourd’hui, personne ne peut le vérifier.</b></div></div>
+  <div class="liaison"><div class="enveloppe">Les deux peuvent être vrais en même temps. <b>Mais aujourd’hui, personne en dehors de l’INSTAT ne peut le vérifier.</b></div></div>
 </div>
 
 <main>
@@ -244,7 +244,7 @@
     <h2>Lire le rapport complet</h2>
     <div class="col">
       <div>
-        <p>Rapport de 21 pages, 54 sources vérifiables, citations auteur-date : <a id="lien-rapport-2" href="#">télécharger le document PDF</a>. Discussion et mises à jour sur <a href="https://assofranklin-blog.github.io/index.html?lang=fr">assofranklin-blog.github.io</a>. <a href="Fiabilite_taux_inflation_INSTAT_Gabon.html">Lire l’analyse complète sur le Blog d’Assoumou-Ndong ↗</a>.</p>
+        <p>Rapport de 21 pages, 54 sources vérifiables, citations auteur-date : <a id="lien-rapport-2" href="#">télécharger le document Word</a>. Discussion et mises à jour sur <a href="https://assofranklin-blog.github.io/index.html?lang=fr">assofranklin-blog.github.io</a>.</p>
         <p style="margin-top:12px">Analyse personnelle et indépendante, fondée exclusivement sur des informations publiques consultées du 11 septembre au 1er octobre 2026. Elle n’engage aucun employeur, aucune administration ni aucune organisation partenaire de l’auteur, et ne formule aucune allégation de falsification. Réalisée avec le support de l’intelligence artificielle ; l’auteur en assume l’intégralité du contenu.</p>
       </div>
       <div>Principales sources : INSTAT GABON (portail de l’IHPC, bulletin mensuel, enquête ESUPSO-I 2026) ; Commission de la CEMAC, Notes sur l’inflation 2024 et 2025 ; AFRISTAT, Guide méthodologique de l’IHPC CEEAC/CEMAC (2017) ; Fonds monétaire international et al., Consumer Price Index Manual (2020) ; FMI, consultations de 2024 au titre de l’article IV ; Statistique Canada ; INSEE ; ANSD du Sénégal ; Banque mondiale.</div>
@@ -254,7 +254,7 @@
 
 <script>
 /* ===== À personnaliser : lien de téléchargement direct Google Drive ===== */
-const LIEN_RAPPORT = "https://drive.google.com/uc?export=download&id=1oL68L53mZSGdIYwQjuRq-3D0sMq-v1Iq";
+const LIEN_RAPPORT = "https://drive.google.com/uc?export=download&id=REMPLACER_PAR_ID_DU_FICHIER";
 /* ======================================================================== */
 document.getElementById("lien-rapport").href = LIEN_RAPPORT;
 document.getElementById("lien-rapport-2").href = LIEN_RAPPORT;
@@ -352,7 +352,7 @@ const issues={
 };
 function basculer(v){
   document.querySelectorAll(".bascule button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v===v));
-  issue.innerHTML = issues[v] + "<br><br>Les deux versions ne peuvent pas être vraies. Sans données publiées sur les contributions par poste, personne ne peut trancher.";
+  issue.innerHTML = issues[v] + "<br><br>Les deux versions ne peuvent pas être vraies. Sans données publiées sur les contributions par poste, personne en dehors de l’INSTAT ne peut trancher.";
 }
 document.querySelectorAll(".bascule button").forEach(b=>b.addEventListener("click",()=>basculer(b.dataset.v)));
 basculer("texte");
