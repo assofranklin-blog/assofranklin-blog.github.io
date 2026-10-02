@@ -1,5 +1,20 @@
 const stories = [
   {
+    category: "Analysis",
+    title: {
+      en: "Is INSTAT Gabon’s published inflation rate reliable?",
+      fr: "Le taux d’inflation publié par l’INSTAT Gabon est-il fiable ?"
+    },
+    excerpt: {
+      en: "Gabon reports 1.3% inflation, yet the data needed to verify the figure remain difficult to access. A seven-criterion review of the country’s consumer price index.",
+      fr: "Le Gabon affiche 1,3 % d’inflation, mais les données nécessaires pour vérifier ce chiffre restent difficiles d’accès. Une analyse de l’indice des prix en sept critères."
+    },
+    date: "2026-10-01",
+    readTime: 8,
+    mark: "1.3",
+    url: { en: "Fiabilite_taux_inflation_INSTAT_Gabon_en.html", fr: "Fiabilite_taux_inflation_INSTAT_Gabon.html" }
+  },
+  {
     category: "Articles",
     title: { en: "The quiet power of asking a better question", fr: "Le pouvoir discret d’une meilleure question" },
     excerpt: {
