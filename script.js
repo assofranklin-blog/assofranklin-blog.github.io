@@ -158,7 +158,7 @@ const translations = {
     "about-eyebrow": "A note on this space", "about-index": "ABOUT / 001",
     "about-title": "Curiosity is a<br><em>way of seeing.</em>",
     "about-description": "Assoumou-Ndong's Blog is an independent publication by <strong>Franklin Assoumou-Ndong</strong> — a place to step back, look closer, and make sense of the stories that shape our lives.",
-    "about-description-two": "Expect original analysis, useful context, and opinions held with an open mind. Always curious. Never certain for certainty’s sake.",
+    "about-experience": "Franklin Assoumou-Ndong has more than 20 years of experience working with official statistics and data governance in Canada.",     "about-description-two": "Expect original analysis, useful context, and opinions held with an open mind. Always curious. Never certain for certainty’s sake.",
     "contact-link": "Start a conversation <span aria-hidden=\"true\">↗</span>",
     "footer-note": "Independent ideas, clearly considered.", "footer-about": "About",
     "footer-contact": "Contact", "footer-newsletter": "Newsletter"
@@ -193,7 +193,7 @@ const translations = {
     "about-eyebrow": "À propos de cet espace", "about-index": "À PROPOS / 001",
     "about-title": "La curiosité est<br><em>une façon de voir.</em>",
     "about-description": "Le Blog d'Assoumou-Ndong est une publication indépendante de <strong>Franklin Assoumou-Ndong</strong> — un espace pour prendre du recul, regarder de plus près et comprendre les histoires qui façonnent nos vies.",
-    "about-description-two": "Au programme : des analyses originales, du contexte utile et des opinions ouvertes. Toujours curieux, jamais certain pour le simple plaisir de l’être.",
+    "about-experience": "Franklin Assoumou-Ndong possède plus de 20 ans d’expérience dans le domaine de la statistique officielle et de la gouvernance des données au Canada.",     "about-description-two": "Au programme : des analyses originales, du contexte utile et des opinions ouvertes. Toujours curieux, jamais certain pour le simple plaisir de l’être.",
     "contact-link": "Entrer en contact <span aria-hidden=\"true\">↗</span>",
     "footer-note": "Des idées indépendantes, mises en perspective.",
     "footer-about": "À propos", "footer-contact": "Contact", "footer-newsletter": "Infolettre"
