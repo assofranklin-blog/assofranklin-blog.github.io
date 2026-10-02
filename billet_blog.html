@@ -1,0 +1,62 @@
+<!--
+  BILLET DU BLOGUE — fragment HTML à intégrer dans une page d'article du blogue
+  https://assofranklin-blog.github.io/ (site statique hébergé sur GitHub Pages),
+  par exemple sur le modèle de la page de l'article consacré au chômage.
+  Titre de l'article : Le taux d'inflation publié par l'INSTAT Gabon est-il fiable ?
+  Catégorie suggérée : Analyse
+  Mots-clés : Gabon, Statistique officielle, Inflation, INSTAT, CEMAC
+  Description de recherche (balise meta description) : Le Gabon affiche 1,3 % d'inflation, mais la vie chère est une priorité nationale. Le taux publié par l'INSTAT est-il fiable ? Analyse en 7 critères.
+
+  Deux remplacements à faire avant publication :
+    1. LIEN_GOOGLE_DRIVE  -> lien de téléchargement direct du rapport Word (voir le kit de diffusion)
+    2. À l'emplacement marqué « IMAGE PLACEMAT », déposer placemat_inflation_INSTAT_Gabon.png dans le dépôt du blogue et l'insérer avec une balise <img>
+  Facultatif : LIEN_VERSION_INTERACTIVE -> adresse de la version interactive une fois déposée dans le dépôt du blogue
+  (par exemple https://assofranklin-blog.github.io/inflation_instat_gabon_interactif.html) ; sinon, supprimer le paragraphe correspondant.
+-->
+<div class="fan-billet">
+<style>
+  .fan-billet{font-family:Calibri,Carlito,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.6;color:#1C2833;max-width:760px}
+  .fan-billet p{margin:0 0 16px}
+  .fan-billet h3{font-size:24px;color:#13324F;margin:30px 0 10px;line-height:1.25}
+  .fan-billet .fan-chapeau{font-size:21px;line-height:1.5;border-left:5px solid #1F4E79;padding:4px 0 4px 18px;margin-bottom:24px}
+  .fan-billet .fan-chapeau b{color:#A8322A}
+  .fan-billet ul{margin:0 0 16px 22px;padding:0}
+  .fan-billet li{margin-bottom:8px}
+  .fan-billet .fan-verdict{background:#13324F;color:#fff;padding:20px 22px;margin:24px 0;font-size:20px;line-height:1.45}
+  .fan-billet .fan-verdict b{font-size:34px;display:block;line-height:1.1;margin-bottom:6px}
+  .fan-billet .fan-bouton{display:inline-block;background:#1F4E79;color:#fff !important;text-decoration:none;font-weight:bold;padding:14px 22px;border-radius:4px;font-size:19px;margin:6px 0 10px}
+  .fan-billet .fan-avertissement{font-size:15px;color:#56636F;border-top:1px solid #CDD6DF;padding-top:14px;margin-top:28px}
+</style>
+
+<p class="fan-chapeau">1,3 %. C’est le taux d’inflation officiel du Gabon en juillet 2026. Au même moment, la lutte contre la vie chère est devenue une priorité gouvernementale : mercuriale de prix plafonds, suspension de la taxe sur la valeur ajoutée sur une centaine de produits, création d’une centrale d’achat. Les deux peuvent être vrais en même temps. <b>Mais aujourd’hui, personne ne peut le vérifier.</b></p>
+
+<h3>Pourquoi cette question</h3>
+<p>Le taux d’inflation n’est pas un chiffre comme les autres. La Banque des États de l’Afrique centrale s’en sert pour conduire la politique monétaire ; il sert à revaloriser salaires, pensions et contrats, à calculer la croissance réelle et à mesurer le pouvoir d’achat. Une erreur d’un point se propage partout. Il est donc légitime de se demander si le taux que publie l’Institut national de la statistique (INSTAT GABON) peut être considéré comme fiable.</p>
+
+<h3>Ce que j’ai fait</h3>
+<p>J’ai examiné tout ce que l’INSTAT publie sur son Indice harmonisé des prix à la consommation (IHPC) et je l’ai confronté à sept critères tirés du Manuel international de l’indice des prix à la consommation et du guide harmonisé de la Communauté économique et monétaire de l’Afrique centrale (CEMAC). J’ai comparé le dispositif gabonais à ceux de Statistique Canada, de l’INSEE en France, de l’ANSD au Sénégal et des autres pays de la CEMAC. Toutes les sources sont publiques, citées et vérifiables.</p>
+
+<div class="fan-verdict"><b>15 points sur 35</b>Rien ne permet d’affirmer que le chiffre est faux. Mais rien de ce qui est publié ne permet d’établir qu’il est juste.</div>
+
+<h3>Ce que j’ai trouvé</h3>
+<ul>
+  <li>Les pondérations du panier reposent sur une enquête de 2017 : neuf ans d’ancienneté, pour une limite de cinq ans fixée à la fois par la norme internationale et par le guide de la CEMAC.</li>
+  <li>Le guide de la CEMAC impose une publication au plus tard le 10 du mois suivant. L’INSTAT annonce 30 à 45 jours, et l’indice d’août 2026 n’était toujours pas publié au 1er octobre.</li>
+  <li>La méthode tient en une note d’une page : ni pondérations détaillées, ni règles de calcul, ni politique de révision. Les anciens bulletins mensuels ne sont plus consultables en ligne.</li>
+  <li>À l’inverse, la collecte des prix est la plus dense de la CEMAC rapportée à la population, et l’INSTAT a publié en 2026 sa première enquête de satisfaction des utilisateurs.</li>
+</ul>
+
+<h3>Et les subventions ?</h3>
+<p>On explique souvent la faible inflation par les subventions aux carburants et la gratuité du transport public. C’est plausible, mais pas démontrable. Les postes visés ne retranchent qu’environ 0,2 point à l’inflation ; au Tchad, l’inflation atteint 5,7 % en 2024 malgré une eau et une électricité à un franc symbolique, puis tombe à −2,6 % en 2025 alors que le logement et l’énergie flambent ; et la seule source régionale disponible se contredit sur l’énergie au Gabon deux années de suite : −1,7 % dans son texte et +2,3 % dans son tableau pour 2024, +1,0 % et +0,1 % pour 2025.</p>
+
+<h3>Ce qu’il faut faire</h3>
+<p>Le rapport formule quinze recommandations. Douze ne coûtent rien : publier un calendrier de diffusion, mettre en ligne la méthodologie et les pondérations, diffuser les séries en formats ouverts. La plus importante demande une opération de terrain déjà en préparation : rebaser l’indice à partir de la nouvelle enquête sur les conditions de vie des ménages. L’enquête de satisfaction de l’INSTAT recommande d’ailleurs elle-même de publier les calendriers et de respecter les délais.</p>
+<p><b>Le déficit n’est pas de calcul, mais de publication. Il est réversible en moins de deux ans.</b></p>
+
+<p><a class="fan-bouton" href="LIEN_GOOGLE_DRIVE">Télécharger le rapport complet (Word, 21 pages, 54 sources)</a></p>
+<p>Pour explorer les résultats de façon interactive : <a href="LIEN_VERSION_INTERACTIVE">version interactive du rapport</a>.</p>
+
+<!-- ===== IMAGE PLACEMAT : insérer ici placemat_inflation_INSTAT_Gabon.png ===== -->
+
+<p class="fan-avertissement">Analyse personnelle et indépendante, fondée exclusivement sur des informations publiques consultées du 11 septembre au 1er octobre 2026. Elle n’engage aucun employeur, aucune administration ni aucune organisation partenaire de l’auteur, et ne formule aucune allégation de falsification. Réalisée avec le support de l’intelligence artificielle ; l’auteur en assume l’intégralité du contenu. Vos commentaires et corrections sont les bienvenus.</p>
+</div>

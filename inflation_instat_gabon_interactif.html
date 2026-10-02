@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le taux d’inflation publié par l’INSTAT Gabon est-il fiable ? — Version interactive</title>
+<meta name="description" content="Analyse indépendante de la fiabilité de l’Indice harmonisé des prix à la consommation du Gabon : grille en sept critères, comparaisons régionales et quinze recommandations.">
+<style>
+  :root{
+    --encre:#13324F; --bleu:#1F4E79; --bleu2:#2E74B5; --papier:#F6F7F4; --fond:#EDF1F5;
+    --vert:#3E7C3A; --ocre:#B7861F; --rouge:#A8322A; --texte:#1C2833; --doux:#56636F; --filet:#CDD6DF;
+    --mono:"Courier Prime","Courier New","Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--fond);color:var(--texte);font-family:Calibri,Carlito,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:var(--bleu2)}
+  :focus-visible{outline:3px solid var(--ocre);outline-offset:2px}
+  .enveloppe{max-width:1080px;margin:0 auto;padding:0 24px}
+  .prose{max-width:720px}
+
+  header{background:var(--encre);color:#fff;padding:56px 0 48px}
+  header .cadre{color:#A9C2DA;font-size:17px;margin-bottom:12px}
+  header h1{font-size:clamp(34px,5.4vw,58px);line-height:1.06;letter-spacing:-.5px;max-width:900px}
+  header .auteur{margin-top:18px;color:#D5E1EC;font-size:18px}
+  header .auteur b{color:#fff}
+  header .actions{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+  .bouton{display:inline-block;background:#fff;color:var(--encre);font-weight:700;text-decoration:none;padding:12px 20px;border-radius:4px;font-size:17px;border:2px solid #fff;cursor:pointer;font-family:inherit}
+  .bouton.creux{background:transparent;color:#fff}
+
+  .accroche{background:#fff;border-bottom:1px solid var(--filet)}
+  .accroche .grille{display:grid;grid-template-columns:1fr 1fr}
+  .accroche .grille > div{padding:30px 28px 26px 0}
+  .accroche .grille > div + div{padding-left:28px;border-left:1px solid var(--filet)}
+  .gros{font-size:clamp(56px,9vw,92px);font-weight:700;line-height:.95;color:var(--bleu);letter-spacing:-2px}
+  .gros.rouge{color:var(--rouge);font-size:clamp(46px,7vw,72px);letter-spacing:-1px;padding-top:10px}
+  .accroche p{color:var(--doux);margin-top:8px}
+  .liaison{background:var(--papier);border-top:1px solid var(--filet);padding:18px 0;font-size:22px}
+
+  main section{padding:52px 0 8px}
+  h2{font-size:clamp(26px,3.4vw,34px);color:var(--encre);line-height:1.15;margin-bottom:10px}
+  .chapeau{color:var(--doux);margin-bottom:24px;max-width:720px}
+
+  /* Ticket interactif */
+  .verdict{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:36px;align-items:start}
+  .verdict > *,.test > *,.accroche .grille > *{min-width:0}
+  .ticket{background:#fff;font-family:var(--mono);font-size:17px;padding:28px 24px 22px;
+    box-shadow:0 14px 30px -18px rgba(19,50,79,.5);
+    -webkit-mask: radial-gradient(circle 8px at 50% 0,transparent 98%,#000) 0 0/20px 51% repeat-x, radial-gradient(circle 8px at 50% 100%,transparent 98%,#000) 0 100%/20px 51% repeat-x;
+            mask: radial-gradient(circle 8px at 50% 0,transparent 98%,#000) 0 0/20px 51% repeat-x, radial-gradient(circle 8px at 50% 100%,transparent 98%,#000) 0 100%/20px 51% repeat-x;}
+  .ticket .t-titre{text-align:center;font-weight:700}
+  .ticket .t-sous{text-align:center;font-size:14px;color:#555;margin:2px 0 10px}
+  .ticket hr{border:none;border-top:2px dashed #999;margin:10px 0}
+  .ligne{display:flex;align-items:baseline;gap:8px;width:100%;background:none;border:none;font:inherit;color:inherit;text-align:left;padding:6px 6px;cursor:pointer;border-radius:3px}
+  .ligne:hover{background:#F1F4F7}
+  .ligne[aria-selected="true"]{background:#E4ECF4}
+  .ligne .pt{width:11px;height:11px;border-radius:50%;flex:none}
+  .ligne .lib{flex:1;min-width:0;white-space:nowrap;overflow:hidden}
+  .ligne .lib::after{content:" ...................................................";color:#aaa}
+  .ligne .val{font-weight:700}
+  .total{display:flex;justify-content:space-between;font-weight:700;font-size:22px;padding:2px 6px}
+  .ticket .pied{text-align:center;font-size:13px;color:#666;margin-top:8px}
+  .v{background:var(--vert)}.o{background:var(--ocre)}.r{background:var(--rouge)}
+
+  .detail{background:#fff;border-left:6px solid var(--bleu);padding:24px 26px;min-height:100%}
+  .detail .etat{display:inline-block;color:#fff;font-weight:700;font-size:15px;padding:4px 10px;border-radius:3px}
+  .detail h3{font-size:26px;color:var(--encre);margin:12px 0 10px;line-height:1.2}
+  .detail p{margin-bottom:12px}
+  .detail .norme{font-size:16px;color:var(--doux);border-top:1px solid var(--filet);padding-top:10px}
+  .aide{font-size:15px;color:var(--doux);margin-top:10px}
+
+  .jugement{margin-top:34px;background:var(--encre);color:#fff;padding:28px 30px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+  .jugement h3{font-size:clamp(22px,2.6vw,28px);line-height:1.25}
+  .jugement p{color:#CFDBE7;margin-top:8px}
+  .jugement .score{font-size:64px;font-weight:700;line-height:1;text-align:right}
+  .jugement .score small{display:block;font-size:17px;font-weight:400;color:#A9C2DA}
+
+  /* Comparaisons */
+  .onglets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .onglets button{font:inherit;font-size:16px;padding:9px 14px;border:1px solid var(--filet);background:#fff;color:var(--encre);border-radius:4px;cursor:pointer}
+  .onglets button[aria-selected="true"]{background:var(--encre);color:#fff;border-color:var(--encre)}
+  .graphe{background:#fff;border:1px solid var(--filet);padding:22px 24px}
+  .graphe .titre-g{font-weight:700;color:var(--encre);margin-bottom:12px}
+  .barre{display:grid;grid-template-columns:190px 1fr 110px;gap:12px;align-items:center;margin:8px 0;font-size:16.5px}
+  .barre .piste{height:22px;background:#EEF2F5;position:relative}
+  .barre .rempli{height:100%;width:0;transition:width .6s ease}
+  .barre .fin{font-weight:700}
+  .barre.gabon .nom{font-weight:700}
+  .seuil{position:absolute;top:-4px;bottom:-4px;border-left:2px dashed var(--encre)}
+  .graphe .note{font-size:15px;color:var(--doux);margin-top:12px}
+
+  /* Paradoxe */
+  .test{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border:1px solid var(--filet)}
+  .test > div{padding:24px}
+  .test > div + div{border-left:1px solid var(--filet)}
+  .bascule{display:flex;gap:8px;margin:14px 0}
+  .bascule button{flex:1;font:inherit;padding:12px 8px;border:2px solid var(--filet);background:#fff;cursor:pointer;border-radius:4px;text-align:center}
+  .bascule button b{display:block;font-size:26px;color:var(--rouge)}
+  .bascule button small{color:var(--doux);font-size:14px}
+  .bascule button[aria-pressed="true"]{border-color:var(--encre);background:#EEF3F8}
+  .test .note{font-size:16px;line-height:1.45;color:var(--doux);margin-top:12px}
+  .issue{font-size:19px;line-height:1.45;padding:14px 16px;background:var(--papier);border-left:5px solid var(--doux)}
+  .causes{list-style:none;margin-top:6px}
+  .causes li{padding:8px 0;border-bottom:1px solid #EEF1F4}
+  .causes li b{color:var(--encre)}
+
+  /* Recommandations */
+  .filtres{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .filtres button{font:inherit;font-size:16px;padding:8px 14px;border:1px solid var(--filet);background:#fff;border-radius:20px;cursor:pointer;color:var(--encre)}
+  .filtres button[aria-pressed="true"]{background:var(--encre);color:#fff;border-color:var(--encre)}
+  .recos{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+  .reco{background:#fff;border-top:4px solid var(--vert);padding:14px 16px 16px}
+  .reco.moyen{border-top-color:var(--ocre)} .reco.struct{border-top-color:var(--bleu)}
+  .reco .code{font-weight:700;color:var(--doux);font-size:15px}
+  .reco h4{font-size:18px;color:var(--encre);margin:2px 0 6px;line-height:1.25}
+  .reco p{font-size:16px;color:var(--texte)}
+  .reco .gratuit{display:inline-block;font-size:13px;background:#E7F0E6;color:var(--vert);padding:2px 8px;border-radius:10px;margin-top:8px;font-weight:700}
+  .compteur{margin-top:14px;color:var(--doux)}
+
+  footer{background:var(--encre);color:#CFDBE7;margin-top:56px;padding:40px 0 48px;font-size:16px}
+  footer h2{color:#fff;font-size:26px}
+  footer .col{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;margin-top:14px}
+  footer a{color:#fff}
+
+  @media (max-width:760px){
+    .ticket{font-size:15px;padding:24px 14px 18px}
+    .bascule{flex-direction:column}
+    .accroche .grille,.verdict,.test,footer .col{grid-template-columns:1fr}
+    .accroche .grille > div + div{border-left:none;padding-left:0;border-top:1px solid var(--filet)}
+    .test > div + div{border-left:none;border-top:1px solid var(--filet)}
+    .jugement{grid-template-columns:1fr}
+    .jugement .score{text-align:left}
+    .barre{grid-template-columns:120px 1fr 80px;font-size:15px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="enveloppe">
+    <div class="cadre">Analyse indépendante de statistique officielle, septembre 2026</div>
+    <h1>Le taux d’inflation publié par l’INSTAT Gabon est-il fiable ?</h1>
+    <div class="auteur"><b>Franklin Assoumou Ndong</b>, analyste en statistique</div>
+    <div class="actions">
+      <a class="bouton" id="lien-rapport" href="#">Télécharger le rapport complet (Word, 21 pages)</a>
+      <a class="bouton creux" href="#verdict">Voir le verdict</a>
+    </div>
+  </div>
+</header>
+
+<div class="accroche">
+  <div class="enveloppe">
+    <div class="grille">
+      <div><div class="gros">1,3 %</div><p>Inflation officielle au Gabon en juillet 2026, sous le plafond de 3 % de la Communauté économique et monétaire de l’Afrique centrale (CEMAC).</p></div>
+      <div><div class="gros rouge">Vie chère</div><p>Priorité gouvernementale en 2026 : mercuriale de prix plafonds, suspension de la taxe sur la valeur ajoutée sur une centaine de produits, centrale d’achat.</p></div>
+    </div>
+  </div>
+  <div class="liaison"><div class="enveloppe">Les deux peuvent être vrais en même temps. <b>Mais aujourd’hui, personne ne peut le vérifier.</b></div></div>
+</div>
+
+<main>
+<div class="enveloppe">
+
+<section id="verdict" aria-labelledby="t-verdict">
+  <h2 id="t-verdict">Le verdict, critère par critère</h2>
+  <p class="chapeau">La fiabilité d’une statistique ne se décrète pas : elle se démontre. La grille applique sept critères tirés du Manuel international de l’indice des prix à la consommation et du guide harmonisé de la CEMAC. Choisissez une ligne du ticket pour lire le constat.</p>
+  <div class="verdict">
+    <div class="ticket">
+      <div class="t-titre">CONTRÔLE DE FIABILITÉ</div>
+      <div class="t-sous">Indice harmonisé des prix à la consommation (IHPC), Gabon</div>
+      <hr>
+      <div role="tablist" aria-label="Critères d’évaluation" id="lignes"></div>
+      <hr>
+      <div class="total"><span>TOTAL</span><span>15/35</span></div>
+      <hr>
+      <div class="pied">Reçu demandé : la méthode derrière le chiffre.</div>
+    </div>
+    <div>
+      <div class="detail" id="detail" role="tabpanel" aria-live="polite"></div>
+      <p class="aide">Vert : conforme ou largement conforme. Ocre : partiellement conforme. Rouge : insuffisant ou non conforme.</p>
+    </div>
+  </div>
+  <div class="jugement">
+    <div>
+      <h3>Pas fiable au sens des normes internationales — non parce que le chiffre serait faux, mais parce que rien de ce qui est publié ne permet de l’établir.</h3>
+      <p>Aucune allégation de manipulation. Le déficit est de publication, non de calcul, et il est réversible en moins de deux ans.</p>
+    </div>
+    <div class="score">43 %<small>15 points sur 35</small></div>
+  </div>
+</section>
+
+<section aria-labelledby="t-comp">
+  <h2 id="t-comp">Le Gabon face à ses pairs et aux agences de référence</h2>
+  <p class="chapeau">Comparer des chiffres bruts entre pays de tailles différentes est trompeur : les indicateurs ci-dessous sont soit normalisés, soit indépendants de la taille du pays.</p>
+  <div class="onglets" role="tablist" aria-label="Indicateur comparé" id="onglets"></div>
+  <div class="graphe" id="graphe" role="tabpanel" aria-live="polite"></div>
+</section>
+
+<section aria-labelledby="t-par">
+  <h2 id="t-par">Les subventions expliquent-elles l’inflation basse ?</h2>
+  <p class="chapeau">L’explication est plausible, mais elle n’est pas démontrée. Le test le plus direct compare l’inflation globale à l’inflation hors énergie. Or la seule source publique qui diffuse ces séries pour le Gabon se contredit d’une page à l’autre, et ce dans deux éditions successives. Choisissez une version.</p>
+  <div class="test">
+    <div>
+      <b>Indice énergie du Gabon en 2024, selon la note de la Commission de la CEMAC</b>
+      <div class="bascule" role="group" aria-label="Version de la série">
+        <button type="button" data-v="texte" aria-pressed="true"><b>−1,7 %</b><small>dans le texte de la note</small></button>
+        <button type="button" data-v="tableau" aria-pressed="false"><b>+2,3 %</b><small>dans le tableau 4 de la même note</small></button>
+      </div>
+      <div class="issue" id="issue" aria-live="polite"></div>
+      <p class="note">Même écart dans la note sur 2025 : l’énergie progresse de 1,0 % selon le texte et de 0,1 % selon le tableau. Les deux valeurs la situent cette fois sous l’inflation d’ensemble (1,8 %), mais l’ampleur d’un éventuel effet des subventions reste impossible à mesurer sans pondérations publiées.</p>
+    </div>
+    <div>
+      <b>D’autres causes jouent aussi, sans avoir été testées</b>
+      <ul class="causes">
+        <li><b>Ordre de grandeur.</b> Les postes visés par les mesures contribuent pour environ −0,2 point : sans eux, l’inflation 2024 serait vers 1,4 %, loin des 4,1 % de la CEMAC.</li>
+        <li><b>Contre-exemple.</b> Au Tchad, eau et électricité à un franc symbolique, et pourtant 5,7 % d’inflation en 2024 ; en 2025, logement +19,4 % et énergie +24,7 %, mais déflation de 2,6 %.</li>
+        <li><b>Ancrage monétaire.</b> Le franc CFA est arrimé à l’euro ; les prix des produits importés au Gabon ont reculé de 0,3 % en 2024.</li>
+        <li><b>Marchés mondiaux, demande, effets de base.</b> Repli des prix alimentaires mondiaux, demande intérieure atone, base élevée de 2023 (3,6 %).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="t-reco">
+  <h2 id="t-reco">Quinze recommandations</h2>
+  <p class="chapeau">L’enquête de satisfaction ESUPSO-I, conduite par l’INSTAT lui-même en 2026, recommande déjà de publier les calendriers et de respecter les délais. Ces mesures en donnent la forme opérationnelle.</p>
+  <div class="filtres" id="filtres" role="group" aria-label="Filtrer les recommandations">
+    <button type="button" data-f="tout" aria-pressed="true">Toutes</button>
+    <button type="button" data-f="imm" aria-pressed="false">Immédiat (0 à 6 mois)</button>
+    <button type="button" data-f="moyen" aria-pressed="false">Moyen terme (6 à 24 mois)</button>
+    <button type="button" data-f="struct" aria-pressed="false">Structurel</button>
+    <button type="button" data-f="gratuit" aria-pressed="false">Sans coût</button>
+  </div>
+  <div class="recos" id="recos"></div>
+  <p class="compteur" id="compteur" aria-live="polite"></p>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="enveloppe">
+    <h2>Lire le rapport complet</h2>
+    <div class="col">
+      <div>
+        <p>Rapport de 21 pages, 54 sources vérifiables, citations auteur-date : <a id="lien-rapport-2" href="#">télécharger le document Word</a>. Discussion et mises à jour sur <a href="https://assofranklin-blog.github.io/index.html?lang=fr">assofranklin-blog.github.io</a>.</p>
+        <p style="margin-top:12px">Analyse personnelle et indépendante, fondée exclusivement sur des informations publiques consultées du 11 septembre au 1er octobre 2026. Elle n’engage aucun employeur, aucune administration ni aucune organisation partenaire de l’auteur, et ne formule aucune allégation de falsification. Réalisée avec le support de l’intelligence artificielle ; l’auteur en assume l’intégralité du contenu.</p>
+      </div>
+      <div>Principales sources : INSTAT GABON (portail de l’IHPC, bulletin mensuel, enquête ESUPSO-I 2026) ; Commission de la CEMAC, Notes sur l’inflation 2024 et 2025 ; AFRISTAT, Guide méthodologique de l’IHPC CEEAC/CEMAC (2017) ; Fonds monétaire international et al., Consumer Price Index Manual (2020) ; FMI, consultations de 2024 au titre de l’article IV ; Statistique Canada ; INSEE ; ANSD du Sénégal ; Banque mondiale.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== À personnaliser : lien de téléchargement direct Google Drive ===== */
+const LIEN_RAPPORT = "https://drive.google.com/uc?export=download&id=REMPLACER_PAR_ID_DU_FICHIER";
+/* ======================================================================== */
+document.getElementById("lien-rapport").href = LIEN_RAPPORT;
+document.getElementById("lien-rapport-2").href = LIEN_RAPPORT;
+
+const COUL = {v:"var(--vert)", o:"var(--ocre)", r:"var(--rouge)"};
+const criteres = [
+  {lib:"1 Pondérations à jour", note:1, c:"r", etat:"Non conforme", titre:"Un panier vieux de neuf ans",
+   txt:"Les pondérations proviennent de l’Enquête gabonaise pour le suivi et l’évaluation de la pauvreté (EGEP II) de 2017. En 2026, elles ont neuf ans, soit près de quatre ans au-delà de la limite fixée.",
+   norme:"Norme : révision au moins tous les cinq ans (Manuel de l’IPC, FMI et al., 2020, § 72 ; guide harmonisé CEMAC, AFRISTAT, 2017)."},
+  {lib:"2 Couverture, collecte", note:4, c:"v", etat:"Largement conforme", titre:"Le dispositif le plus dense de la CEMAC",
+   txt:"Champ national, urbain et rural. Rapporté à la population, c’est le réseau le plus intensif de la sous-région : 780 à 1 081 relevés mensuels pour 100 000 habitants, contre 172 au Cameroun. Limites : plan d’échantillonnage non publié et quatre strates d’indice seulement.",
+   norme:"Sources : Commission de la CEMAC (2025) ; Banque mondiale (2025) ; calculs de l’auteur."},
+  {lib:"3 Traitements publiés", note:2, c:"r", etat:"Insuffisant", titre:"La formule, mais pas les règles",
+   txt:"La formule d’agrégation est indiquée (Laspeyres, agrégations successives). Aucune règle n’est publiée sur les prix manquants, les produits saisonniers, l’ajustement de qualité ou les prix administrés par mercuriale.",
+   norme:"Le guide régional documente pourtant ces règles : un simple lien suffirait."},
+  {lib:"4 Documentation", note:2, c:"r", etat:"Insuffisant", titre:"Une page de vulgarisation",
+   txt:"La note « Comprendre l’IHPC » tient lieu de documentation méthodologique. Les pondérations par fonction de consommation ne sont pas publiées, alors que le guide CEMAC exige que leur élaboration soit transparente.",
+   norme:"Norme : publication des sources, méthodes et procédures (Principes fondamentaux de la statistique officielle, ONU, 2014, principe 3)."},
+  {lib:"5 Calendrier, délais", note:1, c:"r", etat:"Non conforme", titre:"Hors de l’échéance régionale",
+   txt:"Délai annoncé de 30 à 45 jours, sans date ni heure fixées à l’avance, alors que le guide CEMAC impose une diffusion au plus tard le 10 du mois suivant. Au 1er octobre 2026, l’indice d’août n’était toujours pas publié.",
+   norme:"Référence : l’INSEE publie une estimation le dernier jour du mois ; Statistique Canada annonce ses dates plus d’un an à l’avance."},
+  {lib:"6 Accès aux données", note:2, c:"r", etat:"Insuffisant", titre:"Un bon portail, peu de données téléchargeables",
+   txt:"Le portail de l’IHPC est de bonne facture, mais il n’offre ni série historique en format ouvert ni licence de réutilisation. La page nationale de données récapitulatives est en ligne, mais ses séries de l’IPC s’arrêtent à décembre 2023 au plus tard, et la page « Statistiques des prix » était en maintenance du 11 septembre au 1er octobre 2026. Les anciens bulletins en PDF renvoient à la page d’accueil : aucune archive n’est consultable.",
+   norme:"Référence : l’ANSD du Sénégal publie ses séries sous licence ouverte."},
+  {lib:"7 Révisions, redevabilité", note:3, c:"o", etat:"Partiellement conforme", titre:"Un premier pas vers les utilisateurs",
+   txt:"Aucune politique de révision, aucun rapport qualité, aucun comité consultatif permanent. À l’actif : la première enquête de satisfaction des utilisateurs (ESUPSO-I, 2026), menée auprès de 540 structures et publiée intégralement, avec un indice global de 50,7 %.",
+   norme:"Norme : Charte africaine de la statistique (Union africaine, 2009)."}
+];
+const lignes = document.getElementById("lignes"), detail = document.getElementById("detail");
+function montrer(i){
+  const k = criteres[i];
+  lignes.querySelectorAll(".ligne").forEach((b,j)=>{b.setAttribute("aria-selected", j===i); b.tabIndex = j===i?0:-1;});
+  detail.innerHTML = `<span class="etat" style="background:${COUL[k.c]}">${k.etat} — ${k.note}/5</span><h3>${k.titre}</h3><p>${k.txt}</p><p class="norme">${k.norme}</p>`;
+  detail.style.borderLeftColor = COUL[k.c];
+}
+criteres.forEach((k,i)=>{
+  const b = document.createElement("button");
+  b.className="ligne"; b.type="button"; b.setAttribute("role","tab");
+  b.innerHTML = `<i class="pt ${k.c}"></i><span class="lib">${k.lib}</span><span class="val">${k.note}/5</span>`;
+  b.addEventListener("click",()=>montrer(i));
+  b.addEventListener("keydown",e=>{
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();
+      const n=(i+(e.key==="ArrowDown"?1:criteres.length-1))%criteres.length;
+      montrer(n); lignes.children[n].focus();}
+  });
+  lignes.appendChild(b);
+});
+montrer(0);
+
+/* Comparaisons */
+const series = [
+  {nom:"Ancienneté des pondérations", titre:"Ancienneté des pondérations de l’indice en 2026 (années)", max:10, seuil:5, seuilLib:"limite recommandée : 5 ans", mauvais:"haut",
+   d:[["France",1,"1 an"],["Canada",2,"2 ans"],["Cameroun, Tchad",4,"4 ans"],["Sénégal",4.5,"≈ 4,5 ans"],["Gabon",9,"≈ 9 ans"]],
+   note:"Sources : INSEE ; Statistique Canada ; Commission de la CEMAC ; ANSD ; INSTAT GABON."},
+  {nom:"Délai de diffusion", titre:"Délai de diffusion après la fin du mois de référence (jours)", max:50, seuil:10, seuilLib:"échéance CEMAC : le 10", mauvais:"haut",
+   d:[["France, estimation",0.4,"dernier jour"],["Sénégal (UEMOA)",10,"≤ 10 j"],["France, définitif",14,"≈ 14 j","var(--vert)"],["Canada",17,"≈ 17 j","var(--vert)"],["Cameroun (CEMAC), 2026",28,"16 à 28 j","var(--ocre)"],["Gabon (CEMAC)",45,"30 à 45 j"]],
+   note:"L’échéance s’applique aux pays de la CEMAC ; la France et le Canada suivent leurs propres calendriers. Le Cameroun dépasse aussi l’échéance, mais reste en deçà du délai annoncé par l’INSTAT (note de mai 2026 parue le 16 juin, note de juillet le 28 août ; en 2025, la note d’octobre aurait paru le 9 janvier 2026 selon Cameroon Tribune). Sources : INSEE ; ANSD ; Statistique Canada ; INS Cameroun ; Cameroon Tribune ; INSTAT GABON ; AFRISTAT (2017)."},
+  {nom:"Collecte par habitant", titre:"Relevés de prix mensuels pour 100 000 habitants", max:1200, mauvais:"bas",
+   d:[["Gabon (pop. Banque mondiale)",1081,"1 081"],["Gabon (pop. RGPL 2026)",780,"780"],["Congo",571,"571"],["Guinée équatoriale",570,"570"],["Centrafrique",244,"244"],["Cameroun",172,"172"],["Tchad",116,"116"]],
+   note:"Ici, le Gabon est premier. Sources : Commission de la CEMAC (2025) ; Banque mondiale (2025) ; INSTAT GABON ; calculs de l’auteur."},
+  {nom:"Inflation 2024", titre:"Inflation en moyenne annuelle en 2024 (%)", max:6.5, seuil:3, seuilLib:"norme CEMAC : 3 %", mauvais:"haut",
+   d:[["Tchad",5.7,"5,7 %"],["Cameroun",4.5,"4,5 %"],["Guinée équatoriale",3.4,"3,4 %"],["Congo",3.1,"3,1 %"],["Centrafrique",1.5,"1,5 %"],["Gabon",1.2,"1,2 %"]],
+   note:"Moyenne CEMAC : 4,1 %. Source : Commission de la CEMAC (2025)."},
+  {nom:"Inflation 2025", titre:"Inflation en moyenne annuelle en 2025 (%)", max:6.5, seuil:3, seuilLib:"norme CEMAC : 3 %", mauvais:"haut",
+   d:[["Cameroun",3.4,"3,4 %"],["Congo",2.7,"2,7 %"],["Guinée équatoriale",2.3,"2,3 %"],["Gabon",1.8,"1,8 %"],["Centrafrique",1.0,"1,0 %"],["Tchad",-2.6,"−2,6 %","#8C9AA5"]],
+   note:"Moyenne CEMAC : 2,1 %. La déflation tchadienne n’est pas représentée par une barre. Source : Commission de la CEMAC (2026)."}
+];
+const onglets=document.getElementById("onglets"), graphe=document.getElementById("graphe");
+function couleur(s,v,nom){
+  if(s.nom==="Collecte par habitant") return nom.startsWith("Gabon") ? "var(--bleu)" : "#8C9AA5";
+  if(s.seuil===undefined) return "var(--bleu)";
+  return v > s.seuil ? "var(--rouge)" : "var(--vert)";
+}
+function tracer(i){
+  const s=series[i];
+  onglets.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-selected", j===i));
+  let h=`<div class="titre-g">${s.titre}</div>`;
+  s.d.forEach(([nom,v,lab,force])=>{
+    const g = nom.startsWith("Gabon") ? " gabon" : "";
+    const seuil = s.seuil!==undefined ? `<span class="seuil" style="left:${s.seuil/s.max*100}%"></span>` : "";
+    h+=`<div class="barre${g}"><span class="nom">${nom}</span><div class="piste">${seuil}<div class="rempli" data-w="${Math.max(v/s.max*100,0.8)}" style="background:${force||couleur(s,v,nom)}"></div></div><span class="fin">${lab}</span></div>`;
+  });
+  if(s.seuilLib) h+=`<p class="note">Ligne pointillée : ${s.seuilLib}. ${s.note}</p>`; else h+=`<p class="note">${s.note}</p>`;
+  graphe.innerHTML=h;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>graphe.querySelectorAll(".rempli").forEach(el=>el.style.width=el.dataset.w+"%")));
+}
+series.forEach((s,i)=>{const b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.textContent=s.nom;b.addEventListener("click",()=>tracer(i));onglets.appendChild(b);});
+tracer(0);
+
+/* Test des subventions */
+const issue=document.getElementById("issue");
+const issues={
+  texte:"<b>Si l’énergie a baissé de 1,7 %</b>, l’hypothèse tient : les mesures sur l’énergie ont tiré l’indice vers le bas, et l’inflation hors énergie serait supérieure à l’inflation globale.",
+  tableau:"<b>Si l’énergie a augmenté de 2,3 %</b>, l’hypothèse s’effondre : l’inflation hors énergie serait inférieure à l’inflation globale, soit l’inverse exact de ce que produiraient des subventions."
+};
+function basculer(v){
+  document.querySelectorAll(".bascule button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.v===v));
+  issue.innerHTML = issues[v] + "<br><br>Les deux versions ne peuvent pas être vraies. Sans données publiées sur les contributions par poste, personne ne peut trancher.";
+}
+document.querySelectorAll(".bascule button").forEach(b=>b.addEventListener("click",()=>basculer(b.dataset.v)));
+basculer("texte");
+
+/* Recommandations */
+const recos=[
+  ["R1","imm",1,"Publier un calendrier de diffusion annuel","Annoncer douze mois à l’avance la date et l’heure de chaque bulletin mensuel."],
+  ["R2","imm",1,"Publier le guide méthodologique et les pondérations","Mettre en ligne la méthodologie détaillée, ou au minimum un lien vers le guide AFRISTAT, et la table complète des pondérations."],
+  ["R3","imm",1,"Publier une politique de révision et une note sur les prix administrés","Préciser si les relevés portent sur les prix affichés ou sur les prix effectivement payés."],
+  ["R4","imm",1,"Rétablir les pages indisponibles et actualiser la NSDP","Restaurer l’archive des bulletins et alimenter régulièrement la page nationale de données récapitulatives promise au FMI en 2019."],
+  ["R5","imm",1,"Diffuser les séries en formats ouverts","Séries complètes téléchargeables sous licence ouverte, via la migration en cours vers l’Open Data Platform 2.0 et le standard SDMX."],
+  ["R6","imm",1,"Professionnaliser les canaux de contact","Adresse institutionnelle pour la cellule technique de l’IHPC et engagement de délai de réponse."],
+  ["R7","moyen",0,"Rebaser l’IHPC à partir de l’EHCVM","Priorité absolue : l’enquête sur les conditions de vie en préparation fournira des pondérations neuves."],
+  ["R8","moyen",1,"S’engager sur un cycle d’actualisation","Révision au moins tous les cinq ans, puis annuelle une fois le rebasement effectué."],
+  ["R9","moyen",1,"Ramener le délai à quinze jours","La collecte est numérisée et le bulletin généré automatiquement : le délai tient au processus, non à la technique."],
+  ["R10","moyen",1,"Publier des indices infranationaux","Exploiter les seize centres d’observation existants pour publier l’inflation par ville ou par province."],
+  ["R11","moyen",1,"Élargir la gamme des indices publiés","Inflation sous-jacente, contributions par poste, indice par niveau de vie et indice hors prix administrés."],
+  ["R12","moyen",1,"Publier un rapport annuel de qualité","Taux de réponse, prix imputés, substitutions de produits et de points de vente."],
+  ["R13","struct",0,"Adosser la diffusion à une base juridique","Inscrire dans un texte le calendrier annoncé, la non-interférence et l’accès simultané de tous."],
+  ["R14","struct",1,"Créer un comité consultatif des prix","Utilisateurs, Banque centrale, universitaires, syndicats et patronat, en s’appuyant sur l’enquête ESUPSO-I."],
+  ["R15","struct",0,"Solliciter et publier une évaluation externe","Évaluation indépendante de la qualité des statistiques de prix, publiée intégralement."]
+];
+const conteneur=document.getElementById("recos"), compteur=document.getElementById("compteur");
+function filtrer(f){
+  document.querySelectorAll("#filtres button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.f===f));
+  const liste = recos.filter(r=> f==="tout" || (f==="gratuit" ? r[2]===1 : r[1]===f));
+  conteneur.innerHTML = liste.map(r=>`<article class="reco ${r[1]}"><div class="code">${r[0]}</div><h4>${r[3]}</h4><p>${r[4]}</p>${r[2]?'<span class="gratuit">Sans coût</span>':''}</article>`).join("");
+  compteur.textContent = f==="gratuit" ? "12 recommandations sur 15 ne requièrent ni financement ni collecte nouvelle." : `${liste.length} recommandation${liste.length>1?"s":""} affichée${liste.length>1?"s":""}.`;
+}
+document.querySelectorAll("#filtres button").forEach(b=>b.addEventListener("click",()=>filtrer(b.dataset.f)));
+filtrer("tout");
+</script>
+</body>
+</html>
